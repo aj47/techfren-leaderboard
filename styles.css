@@ -75,6 +75,8 @@ main {
     border: 1px solid var(--primary-dark);
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    position: relative;
+    overflow: visible;
 }
 
 .controls {
@@ -101,6 +103,8 @@ button:hover, button.active {
 
 .leaderboard-container {
     overflow-x: auto;
+    overflow-y: visible;
+    position: relative;
 }
 
 .leaderboard {
@@ -187,6 +191,7 @@ footer {
     position: relative;
     cursor: help;
     display: inline-block;
+    z-index: 1;
 }
 
 .tooltip {
@@ -198,7 +203,7 @@ footer {
     border-radius: 6px;
     padding: 10px;
     position: absolute;
-    z-index: 100;
+    z-index: 9999;
     bottom: 130%;
     left: 50%;
     transform: translateX(-50%);
@@ -209,6 +214,7 @@ footer {
     text-shadow: none;
     border: 1px solid var(--primary-dark);
     pointer-events: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .tooltip::after {
