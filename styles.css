@@ -191,46 +191,6 @@ footer {
     position: relative;
     cursor: help;
     display: inline-block;
-    z-index: 1;
-}
-
-.tooltip {
-    visibility: hidden;
-    width: 200px;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: var(--text);
-    text-align: center;
-    border-radius: 6px;
-    padding: 10px;
-    position: absolute;
-    z-index: 9999;
-    bottom: 130%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s, visibility 0.3s;
-    font-size: 0.8rem;
-    font-weight: normal;
-    text-shadow: none;
-    border: 1px solid var(--primary-dark);
-    pointer-events: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.tooltip::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: var(--primary-dark) transparent transparent transparent;
-}
-
-.tooltip-container:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
 }
 
 /* Add a small info icon to make it more obvious there's a tooltip */
@@ -240,6 +200,47 @@ footer {
     margin-left: 4px;
     color: var(--primary);
     vertical-align: super;
+}
+
+/* Global tooltip overlay */
+.tooltip-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.global-tooltip {
+    position: absolute;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: var(--text);
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 0.8rem;
+    font-weight: normal;
+    text-shadow: none;
+    border: 1px solid var(--primary-dark);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    pointer-events: none;
+}
+
+.global-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--primary-dark) transparent transparent transparent;
 }
 
 @media (max-width: 768px) {

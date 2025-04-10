@@ -14,6 +14,9 @@
     <script type="module" src="app.js" defer></script>
 </head>
 <body>
+    <div id="tooltip-overlay" class="tooltip-overlay">
+        <div id="speed-tooltip" class="global-tooltip">Speed is measured in milliseconds per test case. Lower values indicate faster performance.</div>
+    </div>
     <div id="app">
         <div class="digital-rain"></div>
         <header>
@@ -40,9 +43,7 @@
                             <th class="model">Model</th>
                             <th class="passRate">Pass Rate</th>
                             <th class="speed">
-                                <span class="tooltip-container">Speed
-                                    <span class="tooltip">Speed is measured in milliseconds per test case. Lower values indicate faster performance.</span>
-                                </span>
+                                <span class="tooltip-container">Speed</span>
                             </th>
                             <th class="cost">Cost</th>
                         </tr>

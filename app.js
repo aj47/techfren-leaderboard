@@ -148,6 +148,9 @@ function updateProgressTextColors() {
         });
     });
 
+    // Setup tooltip functionality
+    setupTooltip();
+
     function updateColors() {
         progressBars.forEach(bar => {
             const progressElement = bar.querySelector('.progress');
@@ -180,6 +183,53 @@ function updateProgressTextColors() {
             } else {
                 textElement.style.color = '#e0e0e0'; // Light text (same as text color)
             }
+        });
+    }
+
+    function setupTooltip() {
+        const speedHeader = document.querySelector('th.speed .tooltip-container');
+        const speedTooltip = document.getElementById('speed-tooltip');
+        const tooltipOverlay = document.getElementById('tooltip-overlay');
+
+        if (!speedHeader || !speedTooltip || !tooltipOverlay) return;
+
+        // Show tooltip on hover
+        speedHeader.addEventListener('mouseenter', (e) => {
+            const rect = speedHeader.getBoundingClientRect();
+
+            // Position the tooltip above the header
+            speedTooltip.style.left = (rect.left + rect.width / 2) + 'px';
+            speedTooltip.style.top = (rect.top - 10) + 'px';
+
+            // Show the tooltip
+            speedTooltip.style.visibility = 'visible';
+            speedTooltip.style.opacity = '1';
+        });
+
+        // Hide tooltip when mouse leaves
+        speedHeader.addEventListener('mouseleave', () => {
+            speedTooltip.style.visibility = 'hidden';
+            speedTooltip.style.opacity = '0';
+        });
+
+        // For mobile: show on tap
+        speedHeader.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const rect = speedHeader.getBoundingClientRect();
+
+            // Position the tooltip above the header
+            speedTooltip.style.left = (rect.left + rect.width / 2) + 'px';
+            speedTooltip.style.top = (rect.top - 10) + 'px';
+
+            // Show the tooltip
+            speedTooltip.style.visibility = 'visible';
+            speedTooltip.style.opacity = '1';
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                speedTooltip.style.visibility = 'hidden';
+                speedTooltip.style.opacity = '0';
+            }, 3000);
         });
     }
 }
