@@ -186,6 +186,7 @@ footer {
 .tooltip-container {
     position: relative;
     cursor: help;
+    display: inline-block;
 }
 
 .tooltip {
@@ -197,16 +198,17 @@ footer {
     border-radius: 6px;
     padding: 10px;
     position: absolute;
-    z-index: 1;
-    bottom: 125%;
+    z-index: 100;
+    bottom: 130%;
     left: 50%;
-    margin-left: -100px;
+    transform: translateX(-50%);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, visibility 0.3s;
     font-size: 0.8rem;
     font-weight: normal;
     text-shadow: none;
     border: 1px solid var(--primary-dark);
+    pointer-events: none;
 }
 
 .tooltip::after {
@@ -225,6 +227,15 @@ footer {
     opacity: 1;
 }
 
+/* Add a small info icon to make it more obvious there's a tooltip */
+.tooltip-container::after {
+    content: "ⓘ";
+    font-size: 0.8em;
+    margin-left: 4px;
+    color: var(--primary);
+    vertical-align: super;
+}
+
 @media (max-width: 768px) {
     .controls {
         flex-direction: column;
@@ -240,6 +251,13 @@ footer {
 
     .tooltip {
         width: 150px;
-        margin-left: -75px;
+        transform: translateX(-50%);
+        bottom: 120%;
+    }
+
+    /* For touch devices, make tooltip appear on tap */
+    .tooltip-container:active .tooltip {
+        visibility: visible;
+        opacity: 1;
     }
 }
