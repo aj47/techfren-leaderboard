@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@techfrens Coding LLM Benchmarks</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+    }
+    </script>
+    <script type="module" src="app.js" defer></script>
+</head>
+<body>
+    <div id="app">
+        <div class="digital-rain"></div>
+        <header>
+            <h1>@techfrens Coding <span class="highlight">LLM</span> Benchmarks</h1>
+            <h2>Unofficial Aider Polyglot Benchmarks Ran For Various Models</h2>
+        </header>
+        <main>
+            <div class="controls">
+                <button @click="sortBy('passRate')" :class="{ active: sortColumn === 'passRate' }">
+                    Sort by Pass Rate {{ sortColumn === 'passRate' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+                </button>
+                <button @click="sortBy('speed')" :class="{ active: sortColumn === 'speed' }">
+                    Sort by Speed {{ sortColumn === 'speed' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+                </button>
+                <button @click="sortBy('cost')" :class="{ active: sortColumn === 'cost' }">
+                    Sort by Cost {{ sortColumn === 'cost' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+                </button>
+            </div>
+            <div class="leaderboard-container">
+                <table class="leaderboard">
+                    <thead>
+                        <tr>
+                            <th class="rank">Rank</th>
+                            <th class="model">Model</th>
+                            <th class="passRate">Pass Rate</th>
+                            <th class="speed">Speed</th>
+                            <th class="cost">Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(model, index) in sortedModels" :key="model.id" :class="{ 'highlight-row': index < 3 }">
+                            <td class="rank">{{ index + 1 }}</td>
+                            <td class="model">{{ model.name }}</td>
+                            <td class="passRate">
+                                <div class="progress-bar">
+                                    <div class="progress" :style="{ width: model.passRate + '%' }"></div>
+                                    <span class="progress-text">{{ model.passRate }}%</span>
+                                </div>
+                            </td>
+                            <td class="speed">{{ model.speed }} ms</td>
+                            <td class="cost">${{ model.cost.toFixed(4) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <footer>
+            <p>Last updated: {{ currentDate }}</p>
+        </footer>
+    </div>
+</body>
+</html>
