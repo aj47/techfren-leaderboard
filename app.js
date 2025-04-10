@@ -3,16 +3,7 @@ import { createApp, ref, computed } from 'vue';
 createApp({
     setup() {
         const models = ref([
-            { id: 1, name: 'GPT-4 Turbo', passRate: 92.7, speed: 1250, cost: 0.0180 },
-            { id: 2, name: 'Claude 3 Opus', passRate: 93.5, speed: 1500, cost: 0.0200 },
-            { id: 3, name: 'GPT-4o', passRate: 95.3, speed: 850, cost: 0.0150 },
-            { id: 4, name: 'Claude 3 Sonnet', passRate: 87.8, speed: 730, cost: 0.0090 },
-            { id: 5, name: 'GPT-3.5 Turbo', passRate: 75.4, speed: 450, cost: 0.0015 },
-            { id: 6, name: 'Llama 3 70B', passRate: 85.2, speed: 1100, cost: 0.0030 },
-            { id: 7, name: 'Gemini Pro', passRate: 88.9, speed: 980, cost: 0.0075 },
-            { id: 8, name: 'Claude 3 Haiku', passRate: 82.3, speed: 520, cost: 0.0060 },
-            { id: 9, name: 'Mistral Large', passRate: 84.6, speed: 890, cost: 0.0045 },
-            { id: 10, name: 'Code Llama 70B', passRate: 81.7, speed: 920, cost: 0.0020 },
+            { id: 1, name: 'Optimus Alpha', passRate: 23.6, speed: 4225, cost: 0.0000 }
         ]);
 
         const sortColumn = ref('passRate');
@@ -24,7 +15,6 @@ createApp({
             hour: '2-digit',
             minute: '2-digit'
         }));
-
         const sortBy = (column) => {
             if (sortColumn.value === column) {
                 sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
