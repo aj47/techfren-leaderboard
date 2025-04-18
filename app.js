@@ -3,12 +3,46 @@ import { createApp, ref, computed } from 'vue';
 createApp({
     setup() {
         const models = ref([
-            { id: 1, name: 'Optimus Alpha', passRate: 23.6, speed: 4225, cost: 0.0000 },
-            { id: 2, name: 'Quasar Alpha', passRate: 21.4, speed: 13100, cost: 0.0000 }
+            {
+                id: 1,
+                name: 'Gemini Flash 1.5 8B',
+                passRate: 2.7,
+                speed: 88600, // milliseconds per test case
+                cost: 0.0000,
+                details: {
+                    dirname: '2025-04-18-15-38-46--flash-1.5-8b',
+                    test_cases: 225,
+                    model: 'openrouter/google/gemini-flash-1.5-8b-exp',
+                    edit_format: 'diff',
+                    commit_hash: '490cab3',
+                    pass_rate_1: 2.7,
+                    pass_rate_2: 2.7,
+                    pass_num_1: 6,
+                    pass_num_2: 6,
+                    percent_cases_well_formed: 76.4,
+                    error_outputs: 1992,
+                    num_malformed_responses: 147,
+                    num_with_malformed_responses: 53,
+                    user_asks: 12,
+                    lazy_comments: 2,
+                    syntax_errors: 0,
+                    indentation_errors: 0,
+                    exhausted_context_windows: 11,
+                    test_timeouts: 0,
+                    total_tests: 225,
+                    command: 'aider --model openrouter/google/gemini-flash-1.5-8b-exp',
+                    date: '2025-04-18',
+                    versions: '0.71.2.dev',
+                    seconds_per_case: 88.6,
+                    total_cost: 0.0000
+                }
+            }
         ]);
 
         const sortColumn = ref('passRate');
         const sortDirection = ref('desc');
+        const showDetailModal = ref(false);
+        const selectedModel = ref(null);
         const currentDate = ref(new Date().toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -22,6 +56,27 @@ createApp({
             } else {
                 sortColumn.value = column;
                 sortDirection.value = 'desc';
+            }
+        };
+
+        const showDetails = (model) => {
+            selectedModel.value = model;
+            showDetailModal.value = true;
+            // Add event listener to close modal when clicking outside
+            setTimeout(() => {
+                document.addEventListener('click', closeModalOnOutsideClick);
+            }, 100);
+        };
+
+        const closeDetailModal = () => {
+            showDetailModal.value = false;
+            document.removeEventListener('click', closeModalOnOutsideClick);
+        };
+
+        const closeModalOnOutsideClick = (event) => {
+            const modalContent = document.querySelector('.modal-content');
+            if (modalContent && !modalContent.contains(event.target) && event.target.id !== 'detail-modal') {
+                closeDetailModal();
             }
         };
 
@@ -58,7 +113,11 @@ createApp({
             sortDirection,
             sortBy,
             sortedModels,
-            currentDate
+            currentDate,
+            showDetailModal,
+            selectedModel,
+            showDetails,
+            closeDetailModal
         };
     }
 }).mount('#app');
