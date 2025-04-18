@@ -47,6 +47,17 @@ header {
     margin-bottom: 20px;
 }
 
+header a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+header a:hover {
+    color: var(--secondary);
+    text-shadow: 0 0 5px var(--secondary);
+}
+
 h1 {
     font-size: 2.5rem;
     color: var(--primary);
@@ -61,6 +72,17 @@ h2 {
     letter-spacing: 0.5px;
     margin-bottom: 15px;
     font-weight: normal;
+}
+
+h2 a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+h2 a:hover {
+    color: var(--secondary);
+    text-shadow: 0 0 5px var(--secondary);
 }
 
 .header-info {
