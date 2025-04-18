@@ -1,4 +1,4 @@
-import { createApp, ref, computed } from 'vue';
+import { createApp, ref, computed, watch } from 'vue';
 
 createApp({
     setup() {
@@ -17,6 +17,8 @@ createApp({
             .then(data => {
                 models.value = data;
                 isLoading.value = false;
+                // Set the initial date after models are loaded
+                currentDate.value = getLastUpdatedDate();
             })
             .catch(error => {
                 console.error('Error loading models:', error);
@@ -28,13 +30,38 @@ createApp({
         const sortDirection = ref('desc');
         const showDetailModal = ref(false);
         const selectedModel = ref(null);
-        const currentDate = ref(new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        }));
+        // Initialize with current date as fallback
+        const currentDate = ref('');
+
+        // Computed property to get the most recent date from model entries
+        const getLastUpdatedDate = () => {
+            if (!models.value || models.value.length === 0) return '';
+
+            // Find the most recent date from all model entries
+            const dates = models.value.map(model => {
+                // Get the date from the model details
+                const dateStr = model.details.date;
+                // Parse the date string (format: YYYY-MM-DD)
+                return dateStr ? new Date(dateStr) : null;
+            }).filter(date => date !== null);
+
+            if (dates.length === 0) return '';
+
+            // Get the most recent date
+            const mostRecentDate = new Date(Math.max.apply(null, dates));
+
+            // Format the date
+            return mostRecentDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        };
+
+        // Update the current date when models are loaded
+        watch(models, () => {
+            currentDate.value = getLastUpdatedDate();
+        });
         const sortBy = (column) => {
             if (sortColumn.value === column) {
                 sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
