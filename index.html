@@ -115,6 +115,7 @@
         <header>
             <h1>@techfrens Coding <span class="highlight">LLM</span> Benchmarks</h1>
             <h2>Unofficial Aider Polyglot Benchmarks Ran For Various Models</h2>
+            <p class="header-info">This leaderboard includes models that don't appear on the official leaderboard, including smaller and lesser-known models. Join our <a href="https://discord.gg/cK9WeQ7jPq" target="_blank" class="discord-link">Discord</a> to chat or submit a model for benchmarking.</p>
         </header>
         <main>
             <div class="controls">
@@ -129,7 +130,15 @@
                 </button>
             </div>
             <div class="leaderboard-container">
-                <table class="leaderboard">
+                <div v-if="isLoading" class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Loading benchmark data...</p>
+                </div>
+                <div v-else-if="loadError" class="error-container">
+                    <p class="error-message">Error loading data: {{ loadError }}</p>
+                    <p>Please try refreshing the page.</p>
+                </div>
+                <table v-else class="leaderboard">
                     <thead>
                         <tr>
                             <th class="rank">Rank</th>

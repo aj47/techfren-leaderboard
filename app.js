@@ -2,42 +2,27 @@ import { createApp, ref, computed } from 'vue';
 
 createApp({
     setup() {
-        const models = ref([
-            {
-                id: 1,
-                name: 'Gemini Flash 1.5 8B',
-                passRate: 2.7,
-                speed: 88600, // milliseconds per test case
-                cost: 0.0000,
-                details: {
-                    dirname: '2025-04-18-15-38-46--flash-1.5-8b',
-                    test_cases: 225,
-                    model: 'openrouter/google/gemini-flash-1.5-8b-exp',
-                    edit_format: 'diff',
-                    commit_hash: '490cab3',
-                    pass_rate_1: 2.7,
-                    pass_rate_2: 2.7,
-                    pass_num_1: 6,
-                    pass_num_2: 6,
-                    percent_cases_well_formed: 76.4,
-                    error_outputs: 1992,
-                    num_malformed_responses: 147,
-                    num_with_malformed_responses: 53,
-                    user_asks: 12,
-                    lazy_comments: 2,
-                    syntax_errors: 0,
-                    indentation_errors: 0,
-                    exhausted_context_windows: 11,
-                    test_timeouts: 0,
-                    total_tests: 225,
-                    command: 'aider --model openrouter/google/gemini-flash-1.5-8b-exp',
-                    date: '2025-04-18',
-                    versions: '0.71.2.dev',
-                    seconds_per_case: 88.6,
-                    total_cost: 0.0000
+        const models = ref([]);
+        const isLoading = ref(true);
+        const loadError = ref(null);
+
+        // Fetch models from the JSON file
+        fetch('models.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-            }
-        ]);
+                return response.json();
+            })
+            .then(data => {
+                models.value = data;
+                isLoading.value = false;
+            })
+            .catch(error => {
+                console.error('Error loading models:', error);
+                loadError.value = error.message;
+                isLoading.value = false;
+            });
 
         const sortColumn = ref('passRate');
         const sortDirection = ref('desc');
@@ -109,6 +94,8 @@ createApp({
 
         return {
             models,
+            isLoading,
+            loadError,
             sortColumn,
             sortDirection,
             sortBy,
@@ -253,7 +240,7 @@ function updateProgressTextColors() {
         if (!speedHeader || !speedTooltip || !tooltipOverlay) return;
 
         // Show tooltip on hover
-        speedHeader.addEventListener('mouseenter', (e) => {
+        speedHeader.addEventListener('mouseenter', () => {
             const rect = speedHeader.getBoundingClientRect();
 
             // Position the tooltip above the header
