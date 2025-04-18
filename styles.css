@@ -71,13 +71,13 @@ h2 {
     line-height: 1.4;
 }
 
-.discord-link {
+.discord-link, .github-link {
     color: var(--primary);
     text-decoration: none;
     transition: color 0.3s, text-shadow 0.3s;
 }
 
-.discord-link:hover {
+.discord-link:hover, .github-link:hover {
     color: var(--secondary);
     text-shadow: 0 0 5px var(--secondary);
 }
