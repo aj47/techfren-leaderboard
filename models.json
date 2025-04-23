@@ -32,5 +32,39 @@
       "seconds_per_case": 88.6,
       "total_cost": 0.0000
     }
+  },
+  {
+    "id": 2,
+    "name": "Nemotron Ultra 253B",
+    "passRate": 6.7,
+    "speed": 81500,
+    "cost": 0.0000,
+    "details": {
+      "dirname": "2025-04-23-04-18-46--nemotron",
+      "test_cases": 225,
+      "model": "openrouter/nvidia/llama-3.1-nemotron-ultra-253b-v1:free",
+      "edit_format": "diff",
+      "commit_hash": "490cab3",
+      "pass_rate_1": 0.9,
+      "pass_rate_2": 6.7,
+      "pass_num_1": 2,
+      "pass_num_2": 15,
+      "percent_cases_well_formed": 80.4,
+      "error_outputs": 108,
+      "num_malformed_responses": 99,
+      "num_with_malformed_responses": 44,
+      "user_asks": 34,
+      "lazy_comments": 9,
+      "syntax_errors": 0,
+      "indentation_errors": 0,
+      "exhausted_context_windows": 0,
+      "test_timeouts": 6,
+      "total_tests": 225,
+      "command": "aider --model openrouter/nvidia/llama-3.1-nemotron-ultra-253b-v1:free",
+      "date": "2025-04-23",
+      "versions": "0.71.2.dev",
+      "seconds_per_case": 81.5,
+      "total_cost": 0.0000
+    }
   }
 ]
