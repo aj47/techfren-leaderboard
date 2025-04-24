@@ -1,0 +1,51 @@
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+*.swp
+*.swo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Distribution directories
+dist/
+build/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Generated files
+.sass-cache/
+*.css.map
+*.js.map
+
+# Miscellaneous
+.tmp/
+coverage/

@@ -1,0 +1,114 @@
+- id: 1
+  name: "Gemini Flash 1.5 8B"
+  passRate: 2.7
+  speed: 88600
+  cost: 0.0000
+  details:
+    dirname: "2025-04-18-15-38-46--flash-1.5-8b"
+    test_cases: 225
+    model: "openrouter/google/gemini-flash-1.5-8b-exp"
+    edit_format: "diff"
+    commit_hash: "490cab3"
+    pass_rate_1: 2.7
+    pass_rate_2: 2.7
+    pass_num_1: 6
+    pass_num_2: 6
+    percent_cases_well_formed: 76.4
+    error_outputs: 1992
+    num_malformed_responses: 147
+    num_with_malformed_responses: 53
+    user_asks: 12
+    lazy_comments: 2
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 11
+    test_timeouts: 0
+    total_tests: 225
+    command: "aider --model openrouter/google/gemini-flash-1.5-8b-exp"
+    date: "2025-04-18"
+    versions: "0.71.2.dev"
+    seconds_per_case: 88.6
+    total_cost: 0.0000
+
+- id: 2
+  name: "Nemotron Ultra 253B"
+  passRate: 6.7
+  speed: 81500
+  cost: 0.0000
+  details:
+    dirname: "2025-04-23-04-18-46--nemotron"
+    test_cases: 225
+    model: "openrouter/nvidia/llama-3.1-nemotron-ultra-253b-v1:free"
+    edit_format: "diff"
+    commit_hash: "490cab3"
+    pass_rate_1: 0.9
+    pass_rate_2: 6.7
+    pass_num_1: 2
+    pass_num_2: 15
+    percent_cases_well_formed: 80.4
+    error_outputs: 108
+    num_malformed_responses: 99
+    num_with_malformed_responses: 44
+    user_asks: 34
+    lazy_comments: 9
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 6
+    total_tests: 225
+    command: "aider --model openrouter/nvidia/llama-3.1-nemotron-ultra-253b-v1:free"
+    date: "2025-04-23"
+    versions: "0.71.2.dev"
+    seconds_per_case: 81.5
+    total_cost: 0.0000
+
+- id: 3
+  name: "DeepSeek Chat v3"
+  passRate: 44.9
+  speed: 65400
+  cost: 1.355
+  details:
+    dirname: "2025-04-24-01-44-00--ds-v3-0324"
+    test_cases: 225
+    model: "openrouter/deepseek/deepseek-chat-v3-0324"
+    edit_format: "diff"
+    commit_hash: "490cab3-dirty"
+    language: "rust, javascript, go, cpp, python, java"
+    pass_rate_1: 22.2
+    pass_rate_2: 44.9
+    pass_num_1: 50
+    pass_num_2: 101
+    percent_cases_well_formed: 97.8
+    total_api_calls: 414
+    total_retries: 0
+    avg_api_calls_per_test: 1.84
+    avg_retries_per_test: 0.00
+    retry_rate_percent: 0.00
+    language_pass_rates:
+      cpp_pass_rate_1: 34.6
+      cpp_pass_rate_2: 61.5
+      go_pass_rate_1: 17.9
+      go_pass_rate_2: 33.3
+      java_pass_rate_1: 12.8
+      java_pass_rate_2: 42.6
+      javascript_pass_rate_1: 28.6
+      javascript_pass_rate_2: 53.1
+      python_pass_rate_1: 17.6
+      python_pass_rate_2: 44.1
+      rust_pass_rate_1: 26.7
+      rust_pass_rate_2: 36.7
+    error_outputs: 8
+    num_malformed_responses: 8
+    num_with_malformed_responses: 5
+    user_asks: 9
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 6
+    total_tests: 225
+    command: "aider --model openrouter/deepseek/deepseek-chat-v3-0324"
+    date: "2025-04-24"
+    versions: "0.71.2.dev"
+    seconds_per_case: 65.4
+    total_cost: 1.355
