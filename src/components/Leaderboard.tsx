@@ -74,10 +74,13 @@ export default function Leaderboard({ models }: LeaderboardProps) {
   useEffect(() => {
     // Update progress text colors after render
     const updateProgressTextColors = () => {
-      const progressBars = document.querySelectorAll('.progress-bar');
+      // Process both regular progress bars and speed progress bars
+      const allProgressBars = document.querySelectorAll('.progress-bar, .speed-progress-bar');
 
-      progressBars.forEach(bar => {
-        const progressElement = bar.querySelector('.progress') as HTMLElement;
+      allProgressBars.forEach(bar => {
+        // Determine which progress class to look for based on the bar's class
+        const progressClass = bar.classList.contains('progress-bar') ? '.progress' : '.speed-progress';
+        const progressElement = bar.querySelector(progressClass) as HTMLElement;
         const textElement = bar.querySelector('.progress-text') as HTMLElement;
 
         if (!progressElement || !textElement) return;
@@ -101,12 +104,8 @@ export default function Leaderboard({ models }: LeaderboardProps) {
         const overlapEnd = Math.min(textRightEdge, progressRightEdge);
         const overlapWidth = Math.max(0, overlapEnd - overlapStart);
 
-        // If more than 50% of the text is over the colored part, use dark text
-        if (overlapWidth > textWidth / 2) {
-          textElement.style.color = '#0a0a0a'; // Dark text (same as background)
-        } else {
-          textElement.style.color = '#e0e0e0'; // Light text (same as text color)
-        }
+        // Always use white text with the stroke outline for better visibility
+        textElement.style.color = '#ffffff'; // White text
       });
     };
 
@@ -177,7 +176,8 @@ export default function Leaderboard({ models }: LeaderboardProps) {
     <>
       <div id="tooltip-overlay" className="tooltip-overlay">
         <div id="speed-tooltip" className="global-tooltip">
-          Speed is measured in milliseconds per test case. Lower values indicate faster performance.
+          Speed is measured in seconds per test case. Lower values indicate faster performance.
+          The progress bar shows relative speed (30s = full bar, 120s = empty bar).
         </div>
       </div>
 
@@ -196,7 +196,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
           onClick={() => sortBy('speed')}
           className={sortColumn === 'speed' ? 'active' : ''}
         >
-          Sort by Speed {sortColumn === 'speed' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+          Sort by Speed per Case {sortColumn === 'speed' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
         </button>
         <button
           onClick={() => sortBy('cost')}
@@ -214,7 +214,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
               <th className="model">Model</th>
               <th className="passRate">Pass Rate</th>
               <th className="speed">
-                <span className="tooltip-container">Speed</span>
+                <span className="tooltip-container">Speed per Case</span>
               </th>
               <th className="cost">Cost</th>
             </tr>
@@ -234,7 +234,17 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                     <span className="progress-text">{model.passRate}%</span>
                   </div>
                 </td>
-                <td className="speed">{model.speed} ms</td>
+                <td className="speed">
+                  <div className="speed-progress-bar">
+                    <div
+                      className="speed-progress"
+                      style={{
+                        width: `${Math.max(0, Math.min(100, ((120 - (model.speed / 1000)) / (120 - 30)) * 100))}%`
+                      }}
+                    ></div>
+                    <span className="progress-text">{(model.speed / 1000).toFixed(1)} s</span>
+                  </div>
+                </td>
                 <td className="cost">${model.cost.toFixed(4)}</td>
               </tr>
             ))}

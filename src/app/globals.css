@@ -213,8 +213,24 @@ tbody tr:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   font-weight: bold;
-  text-shadow: none;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   transition: color 0.3s ease;
+}
+
+/* Speed progress bar styles */
+.speed-progress-bar {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  height: 20px;
+  position: relative;
+}
+
+.speed-progress {
+  background-color: var(--primary);
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s ease-out;
 }
 
 footer {
