@@ -13,7 +13,7 @@ export default async function Home() {
       <DigitalRain />
 
       <header>
-        <h1>@techfrens Coding <span className="highlight">LLM</span> Benchmarks</h1>
+        <h1><a href="https://techfren.net" target="_blank" className="techfren-link">@techfren</a> Coding <span className="highlight">LLM</span> Benchmarks</h1>
         <h2>
           Unofficial <a href="https://aider.chat/docs/leaderboards/" target="_blank" className="aider-link">Aider</a> Polyglot Benchmarks Ran For Various Models
         </h2>

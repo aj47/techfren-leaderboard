@@ -124,8 +124,80 @@ main {
 .controls {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   gap: 10px;
+  flex-wrap: wrap;
+}
+
+.helper-text {
+  text-align: center;
+  color: var(--text);
+  opacity: 0.8;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.sort-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+}
+
+.language-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.language-dropdown-button {
+  background-color: var(--background-light);
+  color: var(--text);
+  border: 1px solid var(--primary-dark);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+.language-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--background);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+  z-index: 1;
+  border: 1px solid var(--primary-dark);
+  border-radius: 4px;
+  left: 0;
+  right: 0;
+}
+
+.language-dropdown-content button {
+  color: var(--text);
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  border: none;
+  background: transparent;
+  width: 100%;
+  border-radius: 0;
+}
+
+.language-dropdown-content button:hover {
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.language-dropdown-content button.active {
+  background-color: var(--primary-dark);
+  color: var(--background);
+}
+
+.language-dropdown:hover .language-dropdown-content {
+  display: block;
 }
 
 button {
@@ -220,7 +292,7 @@ tbody tr:hover {
 /* Speed progress bar styles */
 .speed-progress-bar {
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: transparent; /* Removed background */
   border-radius: 5px;
   height: 20px;
   position: relative;
@@ -431,6 +503,19 @@ footer {
 @media (max-width: 768px) {
   .controls {
     flex-direction: column;
+  }
+
+  .sort-group {
+    width: 100%;
+  }
+
+  .language-dropdown {
+    width: 100%;
+  }
+
+  .language-dropdown-content {
+    position: relative;
+    width: 100%;
   }
 
   .leaderboard {

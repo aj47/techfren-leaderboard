@@ -49,3 +49,4 @@ out/
 # Miscellaneous
 .tmp/
 coverage/
+.next

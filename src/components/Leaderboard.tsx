@@ -12,6 +12,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
   console.log('Leaderboard component rendering with models:', models);
   const [sortColumn, setSortColumn] = useState<'passRate' | 'speed' | 'cost'>('passRate');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedModel, setSelectedModel] = useState<Model | null>(null);
   const [currentDate, setCurrentDate] = useState('');
@@ -39,11 +40,12 @@ export default function Leaderboard({ models }: LeaderboardProps) {
     }
   }, [models]);
 
-  const sortBy = (column: 'passRate' | 'speed' | 'cost') => {
-    if (sortColumn === column) {
+  const sortBy = (column: 'passRate' | 'speed' | 'cost', language?: string | null) => {
+    if (sortColumn === column && selectedLanguage === language) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
     } else {
       setSortColumn(column);
+      setSelectedLanguage(language);
       setSortDirection('desc');
     }
   };
@@ -61,15 +63,30 @@ export default function Leaderboard({ models }: LeaderboardProps) {
     return [...models].sort((a, b) => {
       let comparison = 0;
 
-      if (a[sortColumn] < b[sortColumn]) {
-        comparison = -1;
-      } else if (a[sortColumn] > b[sortColumn]) {
-        comparison = 1;
+      // If sorting by pass rate and a language is selected
+      if (sortColumn === 'passRate' && selectedLanguage) {
+        const languageKey = `${selectedLanguage.toLowerCase()}_pass_rate_2` as keyof typeof a.details.language_pass_rates;
+
+        const aValue = a.details.language_pass_rates?.[languageKey] ?? 0;
+        const bValue = b.details.language_pass_rates?.[languageKey] ?? 0;
+
+        if (aValue < bValue) {
+          comparison = -1;
+        } else if (aValue > bValue) {
+          comparison = 1;
+        }
+      } else {
+        // Default sorting
+        if (a[sortColumn] < b[sortColumn]) {
+          comparison = -1;
+        } else if (a[sortColumn] > b[sortColumn]) {
+          comparison = 1;
+        }
       }
 
       return sortDirection === 'asc' ? comparison : -comparison;
     });
-  }, [models, sortColumn, sortDirection]);
+  }, [models, sortColumn, sortDirection, selectedLanguage]);
 
   useEffect(() => {
     // Update progress text colors after render
@@ -177,7 +194,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
       <div id="tooltip-overlay" className="tooltip-overlay">
         <div id="speed-tooltip" className="global-tooltip">
           Speed is measured in seconds per test case. Lower values indicate faster performance.
-          The progress bar shows relative speed (30s = full bar, 120s = empty bar).
+          The green bar shows relative speed (30s = full bar, 120s = empty bar).
         </div>
       </div>
 
@@ -186,12 +203,45 @@ export default function Leaderboard({ models }: LeaderboardProps) {
       )}
 
       <div className="controls">
-        <button
-          onClick={() => sortBy('passRate')}
-          className={sortColumn === 'passRate' ? 'active' : ''}
-        >
-          Sort by Pass Rate {sortColumn === 'passRate' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-        </button>
+        <div className="sort-group">
+          <button
+            onClick={() => sortBy('passRate', null)}
+            className={sortColumn === 'passRate' && !selectedLanguage ? 'active' : ''}
+          >
+            Sort by Pass Rate {sortColumn === 'passRate' && !selectedLanguage ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+          </button>
+          <div className="language-dropdown">
+            <button className="language-dropdown-button">
+              By Language {selectedLanguage ? `(${selectedLanguage})` : ''}
+            </button>
+            <div className="language-dropdown-content">
+              <button onClick={() => sortBy('passRate', 'JavaScript')}
+                className={selectedLanguage === 'JavaScript' ? 'active' : ''}>
+                JavaScript {sortColumn === 'passRate' && selectedLanguage === 'JavaScript' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Python')}
+                className={selectedLanguage === 'Python' ? 'active' : ''}>
+                Python {sortColumn === 'passRate' && selectedLanguage === 'Python' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Java')}
+                className={selectedLanguage === 'Java' ? 'active' : ''}>
+                Java {sortColumn === 'passRate' && selectedLanguage === 'Java' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Cpp')}
+                className={selectedLanguage === 'Cpp' ? 'active' : ''}>
+                C++ {sortColumn === 'passRate' && selectedLanguage === 'Cpp' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Go')}
+                className={selectedLanguage === 'Go' ? 'active' : ''}>
+                Go {sortColumn === 'passRate' && selectedLanguage === 'Go' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Rust')}
+                className={selectedLanguage === 'Rust' ? 'active' : ''}>
+                Rust {sortColumn === 'passRate' && selectedLanguage === 'Rust' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+            </div>
+          </div>
+        </div>
         <button
           onClick={() => sortBy('speed')}
           className={sortColumn === 'speed' ? 'active' : ''}
@@ -205,6 +255,9 @@ export default function Leaderboard({ models }: LeaderboardProps) {
           Sort by Cost {sortColumn === 'cost' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
         </button>
       </div>
+      <div className="helper-text">
+        Click on a row to see detailed results
+      </div>
 
       <div className="leaderboard-container">
         <table className="leaderboard">
@@ -212,7 +265,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
             <tr>
               <th className="rank">Rank</th>
               <th className="model">Model</th>
-              <th className="passRate">Pass Rate</th>
+              <th className="passRate">Pass Rate {selectedLanguage ? `(${selectedLanguage})` : ''}</th>
               <th className="speed">
                 <span className="tooltip-container">Speed per Case</span>
               </th>
@@ -230,8 +283,24 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                 <td className="model">{model.name}</td>
                 <td className="passRate">
                   <div className="progress-bar">
-                    <div className="progress" style={{ width: `${model.passRate}%` }}></div>
-                    <span className="progress-text">{model.passRate}%</span>
+                    {selectedLanguage ? (
+                      <>
+                        <div
+                          className="progress"
+                          style={{
+                            width: `${model.details.language_pass_rates?.[`${selectedLanguage.toLowerCase()}_pass_rate_2` as keyof typeof model.details.language_pass_rates] || 0}%`
+                          }}
+                        ></div>
+                        <span className="progress-text">
+                          {model.details.language_pass_rates?.[`${selectedLanguage.toLowerCase()}_pass_rate_2` as keyof typeof model.details.language_pass_rates] || 0}%
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <div className="progress" style={{ width: `${model.passRate}%` }}></div>
+                        <span className="progress-text">{model.passRate}%</span>
+                      </>
+                    )}
                   </div>
                 </td>
                 <td className="speed">
