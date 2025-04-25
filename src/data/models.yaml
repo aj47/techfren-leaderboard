@@ -139,3 +139,48 @@
     versions: "0.82.3.dev"
     seconds_per_case: 180.3
     total_cost: 2.1652
+
+- id: 4
+  name: "Grok-3-mini-beta"
+  passRate: 30.2
+  speed: 64200
+  cost: 0.7777
+  details:
+    dirname: "2025-04-25-04-19-54--grok-3-mini-beta"
+    test_cases: 225
+    model: "openrouter/x-ai/grok-3-mini-beta"
+    edit_format: "whole"
+    commit_hash: "35fed77-dirty"
+    reasoning_effort: "high"
+    pass_rate_1: 10.2
+    pass_rate_2: 30.2
+    pass_num_1: 23
+    pass_num_2: 68
+    percent_cases_well_formed: 100.0
+    total_api_calls: 489
+    total_retries: 0
+    avg_api_calls_per_test: 2.17
+    avg_retries_per_test: 0.00
+    retry_rate_percent: 0.00
+    language_pass_rates:
+      cpp_pass_rate_2: 34.6
+      go_pass_rate_2: 30.8
+      java_pass_rate_2: 21.3
+      javascript_pass_rate_2: 36.7
+      python_pass_rate_2: 26.5
+      rust_pass_rate_2: 33.3
+    error_outputs: 1
+    num_malformed_responses: 0
+    num_with_malformed_responses: 0
+    user_asks: 70
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 6
+    total_tests: 225
+    command: "aider --model openrouter/x-ai/grok-3-mini-beta"
+    date: "2025-04-25"
+    versions: "0.82.3.dev"
+    seconds_per_case: 64.2
+    total_cost: 0.7777

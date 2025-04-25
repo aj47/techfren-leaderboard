@@ -197,7 +197,6 @@ export default function Leaderboard({ models }: LeaderboardProps) {
       <div id="tooltip-overlay" className="tooltip-overlay">
         <div id="speed-tooltip" className="global-tooltip">
           Speed in seconds per test case. Lower is better.
-          Green bar: 30s = full, 120s = empty.
         </div>
       </div>
 
@@ -313,12 +312,6 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                 </td>
                 <td className="speed">
                   <div className="speed-progress-bar">
-                    <div
-                      className="speed-progress"
-                      style={{
-                        width: `${Math.max(0, Math.min(100, ((120 - (model.speed / 1000)) / (120 - 30)) * 100))}%`
-                      }}
-                    ></div>
                     <span className="progress-text">{(model.speed / 1000).toFixed(1)}s</span>
                   </div>
                 </td>
