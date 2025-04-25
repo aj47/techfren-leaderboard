@@ -16,10 +16,7 @@
     pass_num_2: 101
     percent_cases_well_formed: 97.8
     total_api_calls: 414
-    total_retries: 0
     avg_api_calls_per_test: 1.84
-    avg_retries_per_test: 0.00
-    retry_rate_percent: 0.00
     language_pass_rates:
       cpp_pass_rate_1: 34.6
       cpp_pass_rate_2: 61.5
@@ -66,10 +63,7 @@
     pass_num_2: 29
     percent_cases_well_formed: 100.0
     total_api_calls: 0
-    total_retries: 0
     avg_api_calls_per_test: 0.00
-    avg_retries_per_test: 0.00
-    retry_rate_percent: 0.00
     language_pass_rates:
       cpp_pass_rate_2: 7.7
       go_pass_rate_2: 28.2
@@ -113,10 +107,7 @@
     pass_num_2: 61
     percent_cases_well_formed: 100.0
     total_api_calls: 436
-    total_retries: 0
     avg_api_calls_per_test: 1.94
-    avg_retries_per_test: 0.00
-    retry_rate_percent: 0.00
     language_pass_rates:
       cpp_pass_rate_2: 19.2
       go_pass_rate_2: 33.3
@@ -158,10 +149,7 @@
     pass_num_2: 68
     percent_cases_well_formed: 100.0
     total_api_calls: 489
-    total_retries: 0
     avg_api_calls_per_test: 2.17
-    avg_retries_per_test: 0.00
-    retry_rate_percent: 0.00
     language_pass_rates:
       cpp_pass_rate_2: 34.6
       go_pass_rate_2: 30.8
@@ -202,10 +190,7 @@
     pass_num_2: 26
     percent_cases_well_formed: 68.9
     total_api_calls: 684
-    total_retries: 0
     avg_api_calls_per_test: 3.04
-    avg_retries_per_test: 0.00
-    retry_rate_percent: 0.00
     language_pass_rates:
       cpp_pass_rate_2: 7.7
       go_pass_rate_2: 15.4
