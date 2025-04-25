@@ -15,13 +15,16 @@ export default async function Home() {
       <header>
         <h1><a href="https://techfren.net" target="_blank" className="techfren-link">@techfren</a> Coding <span className="highlight">LLM</span> Benchmarks</h1>
         <h2>
-          Unofficial <a href="https://aider.chat/docs/leaderboards/" target="_blank" className="aider-link">Aider</a> Polyglot Benchmarks, including breakdowns per language
+          Unofficial <a href="https://aider.chat/docs/leaderboards/" target="_blank" className="aider-link">Aider</a> Polyglot Benchmarks with sorting per language
         </h2>
         <p className="header-info">
-          Join our <a href="https://discord.gg/cK9WeQ7jPq" target="_blank" className="discord-link">Discord</a> to chat or submit a model for benchmarking.
+          My current mission is to find the best value and speed for money in coding LLMs.
         </p>
         <p className="header-info">
-          This leaderboard is open source. Check out the code on <a href="https://github.com/aj47/techfren-leaderboard" target="_blank" className="github-link">GitHub</a>.
+          Join the community <a href="https://discord.gg/cK9WeQ7jPq" target="_blank" className="discord-link">Discord</a> to chat or submit a model for benchmarking.
+          You can also submit a pull request or issue on <a href="https://github.com/aj47/techfren-leaderboard" target="_blank" className="github-link">GitHub</a>.
+        </p>
+        <p className="header-info">
         </p>
       </header>
 
