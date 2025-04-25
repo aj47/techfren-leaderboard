@@ -92,3 +92,50 @@
     versions: "0.82.3.dev"
     seconds_per_case: 1281.0
     total_cost: 0.0000
+
+- id: 3
+  name: "Grok-3-mini-beta"
+  passRate: 27.1
+  speed: 180300
+  cost: 2.1652
+  details:
+    dirname: "2025-04-25-03-24-44--grook-mini-architect-deepseek-editor"
+    test_cases: 225
+    model: "openrouter/x-ai/grok-3-mini-beta"
+    edit_format: "architect"
+    commit_hash: "35fed77-dirty"
+    editor_model: "openrouter/deepseek/deepseek-chat-v3-0324"
+    editor_edit_format: "editor-diff"
+    reasoning_effort: "high"
+    pass_rate_1: 6.2
+    pass_rate_2: 27.1
+    pass_num_1: 14
+    pass_num_2: 61
+    percent_cases_well_formed: 100.0
+    total_api_calls: 436
+    total_retries: 0
+    avg_api_calls_per_test: 1.94
+    avg_retries_per_test: 0.00
+    retry_rate_percent: 0.00
+    language_pass_rates:
+      cpp_pass_rate_2: 19.2
+      go_pass_rate_2: 33.3
+      java_pass_rate_2: 27.7
+      javascript_pass_rate_2: 28.6
+      python_pass_rate_2: 26.5
+      rust_pass_rate_2: 23.3
+    error_outputs: 14
+    num_malformed_responses: 0
+    num_with_malformed_responses: 0
+    user_asks: 86
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 3
+    total_tests: 225
+    command: "aider --model openrouter/x-ai/grok-3-mini-beta"
+    date: "2025-04-25"
+    versions: "0.82.3.dev"
+    seconds_per_case: 180.3
+    total_cost: 2.1652
