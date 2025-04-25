@@ -277,6 +277,23 @@ tbody tr:hover {
 
 .model {
   min-width: 200px;
+  position: relative;
+}
+
+.architect-badge {
+  display: inline-block;
+  background-color: var(--primary);
+  color: var(--background);
+  font-weight: bold;
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 50%;
+  margin-left: 8px;
+  vertical-align: middle;
+  cursor: help;
 }
 
 .passRate, .speed, .cost {

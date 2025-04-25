@@ -52,6 +52,11 @@ export interface ModelDetails {
   avg_retries_per_test?: number;
   retry_rate_percent?: number;
   language_pass_rates?: LanguagePassRates;
+
+  // Architect mode fields
+  editor_model?: string;
+  editor_edit_format?: string;
+  reasoning_effort?: string;
 }
 
 export interface Model {

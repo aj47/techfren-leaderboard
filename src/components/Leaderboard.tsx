@@ -283,7 +283,12 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                 onClick={() => showDetails(model)}
               >
                 <td className="rank">{index + 1}</td>
-                <td className="model">{model.name}</td>
+                <td className="model">
+                  {model.name}
+                  {model.details.edit_format === "architect" && (
+                    <span className="architect-badge" title="Architect mode with editor model">A</span>
+                  )}
+                </td>
                 <td className="passRate">
                   <div className="progress-bar">
                     {selectedLanguage ? (

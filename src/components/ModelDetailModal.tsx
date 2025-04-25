@@ -46,6 +46,28 @@ export default function ModelDetailModal({ model, onClose }: ModelDetailModalPro
               <span className="detail-value">{model.details.model}</span>
             </div>
             <div className="detail-item">
+              <span className="detail-label">Edit Format:</span>
+              <span className="detail-value">{model.details.edit_format}</span>
+            </div>
+            {model.details.editor_model && (
+              <div className="detail-item">
+                <span className="detail-label">Editor Model:</span>
+                <span className="detail-value">{model.details.editor_model}</span>
+              </div>
+            )}
+            {model.details.editor_edit_format && (
+              <div className="detail-item">
+                <span className="detail-label">Editor Edit Format:</span>
+                <span className="detail-value">{model.details.editor_edit_format}</span>
+              </div>
+            )}
+            {model.details.reasoning_effort && (
+              <div className="detail-item">
+                <span className="detail-label">Reasoning Effort:</span>
+                <span className="detail-value">{model.details.reasoning_effort}</span>
+              </div>
+            )}
+            <div className="detail-item">
               <span className="detail-label">Date:</span>
               <span className="detail-value">{model.details.date}</span>
             </div>
