@@ -15,10 +15,9 @@ export default async function Home() {
       <header>
         <h1><a href="https://techfren.net" target="_blank" className="techfren-link">@techfren</a> Coding <span className="highlight">LLM</span> Benchmarks</h1>
         <h2>
-          Unofficial <a href="https://aider.chat/docs/leaderboards/" target="_blank" className="aider-link">Aider</a> Polyglot Benchmarks Ran For Various Models
+          Unofficial <a href="https://aider.chat/docs/leaderboards/" target="_blank" className="aider-link">Aider</a> Polyglot Benchmarks, including breakdowns per language
         </h2>
         <p className="header-info">
-          This leaderboard includes models that don't appear on the official leaderboard, including smaller and lesser-known models.
           Join our <a href="https://discord.gg/cK9WeQ7jPq" target="_blank" className="discord-link">Discord</a> to chat or submit a model for benchmarking.
         </p>
         <p className="header-info">

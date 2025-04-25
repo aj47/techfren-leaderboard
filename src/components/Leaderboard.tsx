@@ -134,17 +134,27 @@ export default function Leaderboard({ models }: LeaderboardProps) {
 
       if (!speedHeader || !speedTooltip || !tooltipOverlay) return;
 
-      // Show tooltip on hover
-      speedHeader.addEventListener('mouseenter', () => {
-        const rect = (speedHeader as HTMLElement).getBoundingClientRect();
-
+      // Function to position tooltip properly
+      const positionTooltip = (rect: DOMRect) => {
         // Position the tooltip above the header
-        (speedTooltip as HTMLElement).style.left = (rect.left + rect.width / 2) + 'px';
-        (speedTooltip as HTMLElement).style.top = (rect.top - 10) + 'px';
+        const isMobile = window.innerWidth <= 768;
+
+        // For mobile, position at top of screen to ensure visibility
+        if (isMobile) {
+          (speedTooltip as HTMLElement).style.top = '50px';
+        } else {
+          (speedTooltip as HTMLElement).style.top = (rect.top - 10) + 'px';
+        }
 
         // Show the tooltip
         (speedTooltip as HTMLElement).style.visibility = 'visible';
         (speedTooltip as HTMLElement).style.opacity = '1';
+      };
+
+      // Show tooltip on hover for desktop
+      speedHeader.addEventListener('mouseenter', () => {
+        const rect = (speedHeader as HTMLElement).getBoundingClientRect();
+        positionTooltip(rect);
       });
 
       // Hide tooltip when mouse leaves
@@ -157,14 +167,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
       speedHeader.addEventListener('touchstart', (e) => {
         e.preventDefault();
         const rect = (speedHeader as HTMLElement).getBoundingClientRect();
-
-        // Position the tooltip above the header
-        (speedTooltip as HTMLElement).style.left = (rect.left + rect.width / 2) + 'px';
-        (speedTooltip as HTMLElement).style.top = (rect.top - 10) + 'px';
-
-        // Show the tooltip
-        (speedTooltip as HTMLElement).style.visibility = 'visible';
-        (speedTooltip as HTMLElement).style.opacity = '1';
+        positionTooltip(rect);
 
         // Hide after 3 seconds
         setTimeout(() => {
@@ -193,8 +196,8 @@ export default function Leaderboard({ models }: LeaderboardProps) {
     <>
       <div id="tooltip-overlay" className="tooltip-overlay">
         <div id="speed-tooltip" className="global-tooltip">
-          Speed is measured in seconds per test case. Lower values indicate faster performance.
-          The green bar shows relative speed (30s = full bar, 120s = empty bar).
+          Speed in seconds per test case. Lower is better.
+          Green bar: 30s = full, 120s = empty.
         </div>
       </div>
 
@@ -267,7 +270,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
               <th className="model">Model</th>
               <th className="passRate">Pass Rate {selectedLanguage ? `(${selectedLanguage})` : ''}</th>
               <th className="speed">
-                <span className="tooltip-container">Speed per Case</span>
+                <span className="tooltip-container">Speed</span>
               </th>
               <th className="cost">Cost</th>
             </tr>
@@ -311,10 +314,10 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                         width: `${Math.max(0, Math.min(100, ((120 - (model.speed / 1000)) / (120 - 30)) * 100))}%`
                       }}
                     ></div>
-                    <span className="progress-text">{(model.speed / 1000).toFixed(1)} s</span>
+                    <span className="progress-text">{(model.speed / 1000).toFixed(1)}s</span>
                   </div>
                 </td>
-                <td className="cost">${model.cost.toFixed(4)}</td>
+                <td className="cost">${model.cost.toFixed(3)}</td>
               </tr>
             ))}
           </tbody>
