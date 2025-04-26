@@ -285,7 +285,18 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                 <td className="model">
                   {model.name}
                   {model.details.edit_format === "architect" && (
-                    <span className="architect-badge" title="Architect mode with editor model">A</span>
+                    <span className="architect-badge" data-tooltip="Architect mode with editor model">A</span>
+                  )}
+                  {model.details.edit_format === "whole" && (
+                    <span className="whole-badge" data-tooltip="Whole format mode">W</span>
+                  )}
+                  {model.details.reasoning_effort && (
+                    <span
+                      className={`reasoning-badge reasoning-${model.details.reasoning_effort.toLowerCase()}`}
+                      data-tooltip={`Reasoning effort: ${model.details.reasoning_effort}`}
+                    >
+                      R
+                    </span>
                   )}
                 </td>
                 <td className="passRate">

@@ -280,7 +280,7 @@ tbody tr:hover {
   position: relative;
 }
 
-.architect-badge {
+.architect-badge, .whole-badge, .reasoning-badge {
   display: inline-block;
   background-color: var(--primary);
   color: var(--background);
@@ -294,6 +294,78 @@ tbody tr:hover {
   margin-left: 8px;
   vertical-align: middle;
   cursor: help;
+  position: relative;
+}
+
+.whole-badge {
+  background-color: var(--secondary);
+}
+
+.reasoning-badge {
+  background-color: #ff9800; /* Orange for default */
+}
+
+.reasoning-low {
+  background-color: #f44336; /* Red for low */
+}
+
+.reasoning-medium {
+  background-color: #ff9800; /* Orange for medium */
+}
+
+.reasoning-high {
+  background-color: #4caf50; /* Green for high */
+}
+
+/* Badge tooltips */
+.architect-badge::after, .whole-badge::after, .reasoning-badge::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.95);
+  color: var(--text);
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.75rem;
+  font-weight: normal;
+  white-space: nowrap;
+  border: 1px solid var(--primary-dark);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 1000;
+  pointer-events: none;
+  width: max-content;
+  max-width: 200px;
+}
+
+.architect-badge:hover::after, .whole-badge:hover::after, .reasoning-badge:hover::after {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Arrow for tooltips */
+.architect-badge::before, .whole-badge::before, .reasoning-badge::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--primary-dark) transparent transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.architect-badge:hover::before, .whole-badge:hover::before, .reasoning-badge:hover::before {
+  visibility: visible;
+  opacity: 1;
 }
 
 .passRate, .speed, .cost {
@@ -722,7 +794,13 @@ footer {
   }
 
   /* For touch devices, make tooltip appear on tap */
-  .tooltip-container:active .tooltip {
+  .tooltip-container:active .tooltip,
+  .architect-badge:active::after,
+  .whole-badge:active::after,
+  .reasoning-badge:active::after,
+  .architect-badge:active::before,
+  .whole-badge:active::before,
+  .reasoning-badge:active::before {
     visibility: visible;
     opacity: 1;
   }
