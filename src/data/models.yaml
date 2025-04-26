@@ -293,3 +293,43 @@
     versions: "0.82.3.dev"
     seconds_per_case: 419.2
     total_cost: 6.1924
+
+- id: 8
+  name: "Flash 2.5 Thinking"
+  passRate: 48.9
+  speed: 71400
+  cost: 5.0000
+  details:
+    dirname: "2025-04-26-01-06-05--flash-2.5-thinking"
+    test_cases: 225
+    model: "openrouter/google/gemini-2.5-flash-preview:thinking"
+    edit_format: "diff"
+    commit_hash: "3a93da8"
+    reasoning_effort: "high"
+    pass_rate_1: 23.1
+    pass_rate_2: 48.9
+    pass_num_1: 52
+    pass_num_2: 110
+    percent_cases_well_formed: 88.9
+    language_pass_rates:
+      cpp_pass_rate_2: 46.2
+      go_pass_rate_2: 61.5
+      java_pass_rate_2: 46.8
+      javascript_pass_rate_2: 46.9
+      python_pass_rate_2: 50.0
+      rust_pass_rate_2: 40.0
+    error_outputs: 57
+    num_malformed_responses: 46
+    num_with_malformed_responses: 25
+    user_asks: 113
+    lazy_comments: 1
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 2
+    total_tests: 225
+    command: "aider --model openrouter/google/gemini-2.5-flash-preview:thinking"
+    date: "2025-04-26"
+    versions: "0.82.3.dev"
+    seconds_per_case: 71.4
+    total_cost: 5.0000
