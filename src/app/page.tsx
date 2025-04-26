@@ -1,6 +1,7 @@
 import { loadModels } from '../utils/yamlLoader';
 import DigitalRain from '../components/DigitalRain';
 import Leaderboard from '../components/Leaderboard';
+import Charts from '../components/Charts';
 
 export default async function Home() {
   // Load models on the server side
@@ -30,6 +31,7 @@ export default async function Home() {
 
       <main>
         <Leaderboard models={models} />
+        <Charts models={models} />
       </main>
     </div>
   );

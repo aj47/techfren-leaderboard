@@ -439,6 +439,124 @@ footer {
   opacity: 0.7;
 }
 
+/* Charts Styles */
+.charts-container {
+  margin-top: 30px;
+  padding: 20px 0;
+  border-top: 1px solid var(--primary-dark);
+}
+
+.charts-title {
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.chart-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.chart-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--primary-dark);
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.chart-container h3 {
+  color: var(--secondary);
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.chart-description {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--text);
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.chart-insights {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(0, 255, 0, 0.05);
+  border: 1px solid var(--primary-dark);
+  border-radius: 5px;
+}
+
+.chart-insights h4 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.chart-insights ul {
+  padding-left: 20px;
+}
+
+.chart-insights li {
+  margin-bottom: 5px;
+  color: var(--text);
+}
+
+/* Custom tooltip for charts */
+.custom-tooltip {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--primary-dark);
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--text);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.custom-tooltip .label {
+  color: var(--primary);
+  font-weight: bold;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--primary-dark);
+  padding-bottom: 3px;
+}
+
+.custom-tooltip .tooltip-note {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #aaaaaa;
+  margin-top: 5px;
+  border-top: 1px dotted var(--primary-dark);
+  padding-top: 3px;
+}
+
+@media (max-width: 768px) {
+  .charts-container {
+    margin-top: 20px;
+    padding: 15px 0;
+  }
+
+  .charts-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .chart-container {
+    padding: 15px;
+  }
+
+  .chart-container h3 {
+    font-size: 1.2rem;
+  }
+
+  .chart-insights {
+    padding: 10px;
+  }
+}
+
 /* Tooltip styles */
 .tooltip-container {
   position: relative;
@@ -890,5 +1008,23 @@ footer {
 
   .detail-value {
     font-size: 0.9rem;
+  }
+
+  /* Charts responsive adjustments */
+  .charts-container {
+    padding: 5px;
+  }
+
+  .chart-controls button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+
+  .chart-container h3 {
+    font-size: 1rem;
+  }
+
+  .chart-description, .chart-insights {
+    font-size: 0.8rem;
   }
 }
