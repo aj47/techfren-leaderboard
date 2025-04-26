@@ -2,6 +2,8 @@ import { loadModels } from '../utils/yamlLoader';
 import DigitalRain from '../components/DigitalRain';
 import Leaderboard from '../components/Leaderboard';
 import Charts from '../components/Charts';
+import ViewToggle from '../components/ViewToggle';
+import { Suspense } from 'react';
 
 export default async function Home() {
   // Load models on the server side
@@ -30,8 +32,9 @@ export default async function Home() {
       </header>
 
       <main>
-        <Leaderboard models={models} />
-        <Charts models={models} />
+        <Suspense fallback={<div className="loading-container"><div className="loading-spinner"></div><p>Loading...</p></div>}>
+          <ViewToggle models={models} />
+        </Suspense>
       </main>
     </div>
   );

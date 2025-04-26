@@ -141,6 +141,47 @@ main {
   flex-wrap: wrap;
 }
 
+/* View Toggle Styles */
+.view-toggle-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.toggle-button-container {
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--primary-dark);
+}
+
+.toggle-button {
+  background-color: var(--background-light);
+  color: var(--text);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0;
+  border-radius: 0;
+}
+
+.toggle-button:first-child {
+  border-right: 1px solid var(--primary-dark);
+}
+
+.toggle-button.active {
+  background-color: var(--primary-dark);
+  color: var(--background);
+}
+
+@media (max-width: 768px) {
+  .toggle-button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
+
 .helper-text {
   text-align: center;
   color: var(--text);
