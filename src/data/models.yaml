@@ -213,3 +213,83 @@
     versions: "0.82.3.dev"
     seconds_per_case: 100.6
     total_cost: 0.8941
+
+- id: 6
+  name: "Flash 2.5 Thinking"
+  passRate: 47.6
+  speed: 93100
+  cost: 6.0000
+  details:
+    dirname: "2025-04-26-00-02-58--flash-2.5-thinking"
+    test_cases: 225
+    model: "openrouter/google/gemini-2.5-flash-preview:thinking"
+    edit_format: "whole"
+    commit_hash: "cbd744d-dirty"
+    reasoning_effort: "high"
+    pass_rate_1: 20.0
+    pass_rate_2: 47.6
+    pass_num_1: 45
+    pass_num_2: 107
+    percent_cases_well_formed: 93.8
+    language_pass_rates:
+      cpp_pass_rate_2: 42.3
+      go_pass_rate_2: 56.4
+      java_pass_rate_2: 44.7
+      javascript_pass_rate_2: 42.9
+      python_pass_rate_2: 55.9
+      rust_pass_rate_2: 43.3
+    error_outputs: 32
+    num_malformed_responses: 14
+    num_with_malformed_responses: 14
+    user_asks: 161
+    lazy_comments: 6
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 1
+    total_tests: 225
+    command: "aider --model openrouter/google/gemini-2.5-flash-preview:thinking"
+    date: "2025-04-26"
+    versions: "0.82.3.dev"
+    seconds_per_case: 93.1
+    total_cost: 6.0000
+
+- id: 7
+  name: "DeepSeek R1"
+  passRate: 52.0
+  speed: 419200
+  cost: 6.1924
+  details:
+    dirname: "2025-04-25-21-57-58--r1"
+    test_cases: 225
+    model: "openrouter/deepseek/deepseek-r1"
+    edit_format: "diff"
+    commit_hash: "cbd744d"
+    reasoning_effort: "high"
+    pass_rate_1: 23.6
+    pass_rate_2: 52.0
+    pass_num_1: 53
+    pass_num_2: 117
+    percent_cases_well_formed: 76.0
+    language_pass_rates:
+      cpp_pass_rate_2: 38.5
+      go_pass_rate_2: 51.3
+      java_pass_rate_2: 48.9
+      javascript_pass_rate_2: 49.0
+      python_pass_rate_2: 64.7
+      rust_pass_rate_2: 60.0
+    error_outputs: 72
+    num_malformed_responses: 58
+    num_with_malformed_responses: 54
+    user_asks: 127
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 2
+    total_tests: 225
+    command: "aider --model openrouter/deepseek/deepseek-r1"
+    date: "2025-04-25"
+    versions: "0.82.3.dev"
+    seconds_per_case: 419.2
+    total_cost: 6.1924
