@@ -298,6 +298,22 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                       R
                     </span>
                   )}
+                  {model.details.isOpenSource !== undefined && (
+                    <span
+                      className={`opensource-badge ${model.details.isOpenSource ? 'opensource-true' : 'opensource-false'}`}
+                      data-tooltip={model.details.isOpenSource ? 'Open Source Model' : 'Proprietary Model'}
+                    >
+                      {model.details.isOpenSource ? 'OS' : 'P'}
+                    </span>
+                  )}
+                  {model.details.sponsor && (
+                    <span
+                      className="sponsor-badge"
+                      data-tooltip={`Sponsored by: ${model.details.sponsor}`}
+                    >
+                      S
+                    </span>
+                  )}
                 </td>
                 <td className="passRate">
                   <div className="progress-bar">
