@@ -191,11 +191,10 @@ main {
   font-style: italic;
 }
 
-.sort-group {
+.language-dropdown-container {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  position: relative;
+  justify-content: center;
+  margin-bottom: 15px;
 }
 
 .language-dropdown {
@@ -293,6 +292,26 @@ th {
   background-color: rgba(0, 255, 0, 0.1);
   font-weight: bold;
   color: var(--primary);
+}
+
+th.sortable {
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+th.sortable:hover {
+  background-color: rgba(0, 255, 0, 0.2);
+}
+
+th.active {
+  background-color: rgba(0, 255, 0, 0.25);
+}
+
+.sort-indicator {
+  margin-left: 5px;
+  display: inline-block;
+  font-weight: bold;
 }
 
 tbody tr {
@@ -897,14 +916,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .controls {
-    flex-direction: column;
-  }
-
-  .sort-group {
-    width: 100%;
-  }
-
   .language-dropdown {
     width: 100%;
   }
@@ -912,6 +923,11 @@ footer {
   .language-dropdown-content {
     position: relative;
     width: 100%;
+  }
+
+  .sort-indicator {
+    margin-left: 2px;
+    font-size: 0.9rem;
   }
 
   /* Improved table styles for mobile */

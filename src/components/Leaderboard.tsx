@@ -152,7 +152,8 @@ export default function Leaderboard({ models }: LeaderboardProps) {
       };
 
       // Show tooltip on hover for desktop
-      speedHeader.addEventListener('mouseenter', () => {
+      speedHeader.addEventListener('mouseenter', (e) => {
+        // Don't prevent default to allow the click for sorting
         const rect = (speedHeader as HTMLElement).getBoundingClientRect();
         positionTooltip(rect);
       });
@@ -163,9 +164,9 @@ export default function Leaderboard({ models }: LeaderboardProps) {
         (speedTooltip as HTMLElement).style.opacity = '0';
       });
 
-      // For mobile: show on tap
+      // For mobile: show on tap, but don't interfere with sorting
       speedHeader.addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        // Don't prevent default to allow the click for sorting
         const rect = (speedHeader as HTMLElement).getBoundingClientRect();
         positionTooltip(rect);
 
@@ -204,61 +205,45 @@ export default function Leaderboard({ models }: LeaderboardProps) {
         <ModelDetailModal model={selectedModel} onClose={closeDetailModal} />
       )}
 
-      <div className="controls">
-        <div className="sort-group">
-          <button
-            onClick={() => sortBy('passRate', null)}
-            className={sortColumn === 'passRate' && !selectedLanguage ? 'active' : ''}
-          >
-            Sort by Pass Rate {sortColumn === 'passRate' && !selectedLanguage ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+      <div className="language-dropdown-container">
+        <div className="language-dropdown">
+          <button className="language-dropdown-button">
+            Language: {selectedLanguage || 'All Languages'}
           </button>
-          <div className="language-dropdown">
-            <button className="language-dropdown-button">
-              By Language {selectedLanguage ? `(${selectedLanguage})` : ''}
+          <div className="language-dropdown-content">
+            <button onClick={() => sortBy('passRate', null)}
+              className={selectedLanguage === null ? 'active' : ''}>
+              All Languages {sortColumn === 'passRate' && selectedLanguage === null ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
             </button>
-            <div className="language-dropdown-content">
-              <button onClick={() => sortBy('passRate', 'JavaScript')}
-                className={selectedLanguage === 'JavaScript' ? 'active' : ''}>
-                JavaScript {sortColumn === 'passRate' && selectedLanguage === 'JavaScript' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-              </button>
-              <button onClick={() => sortBy('passRate', 'Python')}
-                className={selectedLanguage === 'Python' ? 'active' : ''}>
-                Python {sortColumn === 'passRate' && selectedLanguage === 'Python' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-              </button>
-              <button onClick={() => sortBy('passRate', 'Java')}
-                className={selectedLanguage === 'Java' ? 'active' : ''}>
-                Java {sortColumn === 'passRate' && selectedLanguage === 'Java' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-              </button>
-              <button onClick={() => sortBy('passRate', 'Cpp')}
-                className={selectedLanguage === 'Cpp' ? 'active' : ''}>
-                C++ {sortColumn === 'passRate' && selectedLanguage === 'Cpp' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-              </button>
-              <button onClick={() => sortBy('passRate', 'Go')}
-                className={selectedLanguage === 'Go' ? 'active' : ''}>
-                Go {sortColumn === 'passRate' && selectedLanguage === 'Go' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-              </button>
-              <button onClick={() => sortBy('passRate', 'Rust')}
-                className={selectedLanguage === 'Rust' ? 'active' : ''}>
-                Rust {sortColumn === 'passRate' && selectedLanguage === 'Rust' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-              </button>
-            </div>
+            <button onClick={() => sortBy('passRate', 'JavaScript')}
+              className={selectedLanguage === 'JavaScript' ? 'active' : ''}>
+              JavaScript {sortColumn === 'passRate' && selectedLanguage === 'JavaScript' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+            </button>
+            <button onClick={() => sortBy('passRate', 'Python')}
+              className={selectedLanguage === 'Python' ? 'active' : ''}>
+              Python {sortColumn === 'passRate' && selectedLanguage === 'Python' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+            </button>
+            <button onClick={() => sortBy('passRate', 'Java')}
+              className={selectedLanguage === 'Java' ? 'active' : ''}>
+              Java {sortColumn === 'passRate' && selectedLanguage === 'Java' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+            </button>
+            <button onClick={() => sortBy('passRate', 'Cpp')}
+              className={selectedLanguage === 'Cpp' ? 'active' : ''}>
+              C++ {sortColumn === 'passRate' && selectedLanguage === 'Cpp' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+            </button>
+            <button onClick={() => sortBy('passRate', 'Go')}
+              className={selectedLanguage === 'Go' ? 'active' : ''}>
+              Go {sortColumn === 'passRate' && selectedLanguage === 'Go' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+            </button>
+            <button onClick={() => sortBy('passRate', 'Rust')}
+              className={selectedLanguage === 'Rust' ? 'active' : ''}>
+              Rust {sortColumn === 'passRate' && selectedLanguage === 'Rust' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+            </button>
           </div>
         </div>
-        <button
-          onClick={() => sortBy('speed')}
-          className={sortColumn === 'speed' ? 'active' : ''}
-        >
-          Sort by Speed per Case {sortColumn === 'speed' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-        </button>
-        <button
-          onClick={() => sortBy('cost')}
-          className={sortColumn === 'cost' ? 'active' : ''}
-        >
-          Sort by Cost {sortColumn === 'cost' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-        </button>
       </div>
       <div className="helper-text">
-        Click on a row to see detailed results
+        Click on column headers to sort. Click on a row to see detailed results.
       </div>
 
       <div className="leaderboard-container">
@@ -267,11 +252,35 @@ export default function Leaderboard({ models }: LeaderboardProps) {
             <tr>
               <th className="rank">Rank</th>
               <th className="model">Model</th>
-              <th className="passRate">Pass Rate {selectedLanguage ? `(${selectedLanguage})` : ''}</th>
-              <th className="speed">
-                <span className="tooltip-container">Speed</span>
+              <th
+                className={`passRate sortable ${sortColumn === 'passRate' ? 'active' : ''}`}
+                onClick={() => sortBy('passRate', selectedLanguage)}
+              >
+                Pass Rate {selectedLanguage ? `(${selectedLanguage})` : ''}
+                {sortColumn === 'passRate' && (
+                  <span className="sort-indicator">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                )}
               </th>
-              <th className="cost">Cost</th>
+              <th
+                className={`speed sortable ${sortColumn === 'speed' ? 'active' : ''}`}
+                onClick={() => sortBy('speed')}
+              >
+                <span className="tooltip-container">
+                  Speed per Case
+                  {sortColumn === 'speed' && (
+                    <span className="sort-indicator">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                  )}
+                </span>
+              </th>
+              <th
+                className={`cost sortable ${sortColumn === 'cost' ? 'active' : ''}`}
+                onClick={() => sortBy('cost')}
+              >
+                Cost
+                {sortColumn === 'cost' && (
+                  <span className="sort-indicator">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                )}
+              </th>
             </tr>
           </thead>
           <tbody>
