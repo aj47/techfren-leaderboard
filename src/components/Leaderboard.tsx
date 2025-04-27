@@ -121,8 +121,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
         const overlapEnd = Math.min(textRightEdge, progressRightEdge);
         const overlapWidth = Math.max(0, overlapEnd - overlapStart);
 
-        // Always use white text with the stroke outline for better visibility
-        textElement.style.color = '#ffffff'; // White text
+        // Text color is now handled by CSS with background blocks
       });
     };
 
