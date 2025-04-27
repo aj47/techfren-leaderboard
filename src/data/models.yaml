@@ -333,3 +333,43 @@
     versions: "0.82.3.dev"
     seconds_per_case: 71.4
     total_cost: 5.0000
+
+- id: 9
+  name: "MS R1"
+  passRate: 56.9
+  speed: 374800
+  cost: 0.0000
+  details:
+    dirname: "2025-04-27-20-38-24--MS-R1"
+    test_cases: 225
+    model: "openrouter/microsoft/mai-ds-r1:free"
+    edit_format: "diff"
+    commit_hash: "3a93da8"
+    reasoning_effort: "high"
+    pass_rate_1: 24.0
+    pass_rate_2: 56.9
+    pass_num_1: 54
+    pass_num_2: 128
+    percent_cases_well_formed: 98.2
+    language_pass_rates:
+      cpp_pass_rate_2: 53.8
+      go_pass_rate_2: 66.7
+      java_pass_rate_2: 40.4
+      javascript_pass_rate_2: 65.3
+      python_pass_rate_2: 61.8
+      rust_pass_rate_2: 53.3
+    error_outputs: 42
+    num_malformed_responses: 4
+    num_with_malformed_responses: 4
+    user_asks: 108
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 2
+    total_tests: 225
+    command: "aider --model openrouter/microsoft/mai-ds-r1:free"
+    date: "2025-04-27"
+    versions: "0.82.3.dev"
+    seconds_per_case: 374.8
+    total_cost: 0.0000
