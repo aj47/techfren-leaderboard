@@ -45,6 +45,7 @@
     versions: "0.71.2.dev"
     seconds_per_case: 65.4
     total_cost: 1.355
+    isOpenSource: true
 
 - id: 2
   name: "GLM-4"
@@ -86,6 +87,7 @@
     versions: "0.82.3.dev"
     seconds_per_case: 1281.0
     total_cost: 0.0000
+    isOpenSource: true
 
 - id: 3
   name: "Grok-3-mini-beta"
@@ -130,6 +132,7 @@
     versions: "0.82.3.dev"
     seconds_per_case: 180.3
     total_cost: 2.1652
+    isOpenSource: false
 
 - id: 4
   name: "Grok-3-mini-beta"
@@ -172,6 +175,7 @@
     versions: "0.82.3.dev"
     seconds_per_case: 64.2
     total_cost: 0.7777
+    isOpenSource: false
 
 - id: 5
   name: "Qwen 2.5 Coder 32B"
@@ -213,6 +217,7 @@
     versions: "0.82.3.dev"
     seconds_per_case: 100.6
     total_cost: 0.8941
+    isOpenSource: true
 
 - id: 6
   name: "Flash 2.5 Thinking"
@@ -253,6 +258,7 @@
     versions: "0.82.3.dev"
     seconds_per_case: 93.1
     total_cost: 6.0000
+    isOpenSource: false
 
 - id: 7
   name: "DeepSeek R1"
@@ -293,6 +299,7 @@
     versions: "0.82.3.dev"
     seconds_per_case: 419.2
     total_cost: 6.1924
+    isOpenSource: true
 
 - id: 8
   name: "Flash 2.5 Thinking"
@@ -333,6 +340,7 @@
     versions: "0.82.3.dev"
     seconds_per_case: 71.4
     total_cost: 5.0000
+    isOpenSource: false
 
 - id: 9
   name: "MS R1"
@@ -373,3 +381,5 @@
     versions: "0.82.3.dev"
     seconds_per_case: 374.8
     total_cost: 0.0000
+    isOpenSource: true
+    sponsor: "Terminally Lazy"

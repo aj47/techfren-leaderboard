@@ -321,7 +321,7 @@ tbody tr:hover {
   position: relative;
 }
 
-.architect-badge, .whole-badge, .reasoning-badge {
+.architect-badge, .whole-badge, .reasoning-badge, .opensource-badge, .sponsor-badge {
   display: inline-block;
   background-color: var(--primary);
   color: var(--background);
@@ -358,8 +358,20 @@ tbody tr:hover {
   background-color: #4caf50; /* Green for high */
 }
 
+.opensource-true {
+  background-color: #4caf50; /* Green for open source */
+}
+
+.opensource-false {
+  background-color: #f44336; /* Red for proprietary */
+}
+
+.sponsor-badge {
+  background-color: #9c27b0; /* Purple for sponsored */
+}
+
 /* Badge tooltips */
-.architect-badge::after, .whole-badge::after, .reasoning-badge::after {
+.architect-badge::after, .whole-badge::after, .reasoning-badge::after, .opensource-badge::after, .sponsor-badge::after {
   content: attr(data-tooltip);
   position: absolute;
   bottom: 150%;
@@ -384,13 +396,13 @@ tbody tr:hover {
   max-width: 200px;
 }
 
-.architect-badge:hover::after, .whole-badge:hover::after, .reasoning-badge:hover::after {
+.architect-badge:hover::after, .whole-badge:hover::after, .reasoning-badge:hover::after, .opensource-badge:hover::after, .sponsor-badge:hover::after {
   visibility: visible;
   opacity: 1;
 }
 
 /* Arrow for tooltips */
-.architect-badge::before, .whole-badge::before, .reasoning-badge::before {
+.architect-badge::before, .whole-badge::before, .reasoning-badge::before, .opensource-badge::before, .sponsor-badge::before {
   content: "";
   position: absolute;
   top: -20px;
@@ -404,7 +416,7 @@ tbody tr:hover {
   transition: opacity 0.3s, visibility 0.3s;
 }
 
-.architect-badge:hover::before, .whole-badge:hover::before, .reasoning-badge:hover::before {
+.architect-badge:hover::before, .whole-badge:hover::before, .reasoning-badge:hover::before, .opensource-badge:hover::before, .sponsor-badge:hover::before {
   visibility: visible;
   opacity: 1;
 }

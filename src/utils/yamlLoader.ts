@@ -57,6 +57,12 @@ export interface ModelDetails {
   editor_model?: string;
   editor_edit_format?: string;
   reasoning_effort?: string;
+
+  // Model source information
+  isOpenSource?: boolean;
+
+  // Sponsorship information
+  sponsor?: string;
 }
 
 export interface Model {

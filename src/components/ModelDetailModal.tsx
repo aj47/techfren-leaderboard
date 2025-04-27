@@ -89,6 +89,18 @@ export default function ModelDetailModal({ model, onClose }: ModelDetailModalPro
                 <span className="detail-value">{model.details.language}</span>
               </div>
             )}
+            {model.details.isOpenSource !== undefined && (
+              <div className="detail-item">
+                <span className="detail-label">Open Source:</span>
+                <span className="detail-value">{model.details.isOpenSource ? 'Yes' : 'No'}</span>
+              </div>
+            )}
+            {model.details.sponsor && (
+              <div className="detail-item">
+                <span className="detail-label">Sponsored By:</span>
+                <span className="detail-value">{model.details.sponsor}</span>
+              </div>
+            )}
           </div>
           <div className="detail-section">
             <h3>Performance Metrics</h3>
