@@ -319,7 +319,7 @@ td.model .cell-content {
   text-align: left;
 }
 
-.architect-badge, .whole-badge, .reasoning-badge, .opensource-badge, .sponsor-badge {
+.architect-badge, .whole-badge, .reasoning-badge, .opensource-badge, .sponsor-badge, .diff-badge {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -377,6 +377,10 @@ td.model .cell-content {
   background: linear-gradient(135deg, #9c27b0, #7b1fa2); /* Purple for sponsored */
 }
 
+.diff-badge {
+  background: linear-gradient(135deg, #ff5722, #e64a19); /* Orange-red for diff format */
+}
+
 @keyframes badgePulse {
   0% {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -392,14 +396,14 @@ td.model .cell-content {
 /* Animation is now applied directly in the main badge selector */
 
 .architect-badge:hover, .whole-badge:hover, .reasoning-badge:hover,
-.opensource-badge:hover, .sponsor-badge:hover {
+.opensource-badge:hover, .sponsor-badge:hover, .diff-badge:hover {
   transform: scale(1.1) translateZ(0);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
   animation: none;
 }
 
 /* Badge tooltips */
-.architect-badge::after, .whole-badge::after, .reasoning-badge::after, .opensource-badge::after, .sponsor-badge::after {
+.architect-badge::after, .whole-badge::after, .reasoning-badge::after, .opensource-badge::after, .sponsor-badge::after, .diff-badge::after {
   content: attr(data-tooltip);
   position: absolute;
   bottom: 150%;
@@ -425,14 +429,14 @@ td.model .cell-content {
   backdrop-filter: blur(2px);
 }
 
-.architect-badge:hover::after, .whole-badge:hover::after, .reasoning-badge:hover::after, .opensource-badge:hover::after, .sponsor-badge:hover::after {
+.architect-badge:hover::after, .whole-badge:hover::after, .reasoning-badge:hover::after, .opensource-badge:hover::after, .sponsor-badge:hover::after, .diff-badge:hover::after {
   visibility: visible;
   opacity: 1;
   bottom: 160%;
 }
 
 /* Arrow for tooltips */
-.architect-badge::before, .whole-badge::before, .reasoning-badge::before, .opensource-badge::before, .sponsor-badge::before {
+.architect-badge::before, .whole-badge::before, .reasoning-badge::before, .opensource-badge::before, .sponsor-badge::before, .diff-badge::before {
   content: "";
   position: absolute;
   top: -20px;
@@ -447,7 +451,7 @@ td.model .cell-content {
   filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.2));
 }
 
-.architect-badge:hover::before, .whole-badge:hover::before, .reasoning-badge:hover::before, .opensource-badge:hover::before, .sponsor-badge:hover::before {
+.architect-badge:hover::before, .whole-badge:hover::before, .reasoning-badge:hover::before, .opensource-badge:hover::before, .sponsor-badge:hover::before, .diff-badge:hover::before {
   visibility: visible;
   opacity: 1;
 }
@@ -940,9 +944,15 @@ footer {
   .architect-badge:active::after,
   .whole-badge:active::after,
   .reasoning-badge:active::after,
+  .diff-badge:active::after,
+  .opensource-badge:active::after,
+  .sponsor-badge:active::after,
   .architect-badge:active::before,
   .whole-badge:active::before,
-  .reasoning-badge:active::before {
+  .reasoning-badge:active::before,
+  .diff-badge:active::before,
+  .opensource-badge:active::before,
+  .sponsor-badge:active::before {
     visibility: visible;
     opacity: 1;
   }

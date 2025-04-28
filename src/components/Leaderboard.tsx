@@ -301,6 +301,9 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                     {model.details.edit_format === "whole" && (
                       <span className="whole-badge" data-tooltip="Whole format mode">W</span>
                     )}
+                    {model.details.edit_format === "diff" && (
+                      <span className="diff-badge" data-tooltip="Diff format mode">D</span>
+                    )}
                     {model.details.reasoning_effort && (
                       <span
                         className={`reasoning-badge reasoning-${model.details.reasoning_effort.toLowerCase()}`}
