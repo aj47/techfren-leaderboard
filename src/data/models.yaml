@@ -382,4 +382,45 @@
     seconds_per_case: 374.8
     total_cost: 0.0000
     isOpenSource: true
+
+- id: 10
+  name: "R1T-Chimera"
+  passRate: 48.4
+  speed: 186400
+  cost: 0.0000
+  details:
+    dirname: "2025-04-27-22-35-04--R1T-Chimera"
+    test_cases: 225
+    model: "openrouter/tngtech/deepseek-r1t-chimera:free"
+    edit_format: "diff"
+    commit_hash: "3a93da8"
+    reasoning_effort: "high"
+    pass_rate_1: 20.9
+    pass_rate_2: 48.4
+    pass_num_1: 47
+    pass_num_2: 109
+    percent_cases_well_formed: 99.6
+    language_pass_rates:
+      cpp_pass_rate_2: 65.4
+      go_pass_rate_2: 43.6
+      java_pass_rate_2: 42.6
+      javascript_pass_rate_2: 46.9
+      python_pass_rate_2: 52.9
+      rust_pass_rate_2: 46.7
+    error_outputs: 1457
+    num_malformed_responses: 1
+    num_with_malformed_responses: 1
+    user_asks: 87
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 5
+    total_tests: 225
+    command: "aider --model openrouter/tngtech/deepseek-r1t-chimera:free"
+    date: "2025-04-27"
+    versions: "0.82.3.dev"
+    seconds_per_case: 186.4
+    total_cost: 0.0000
+    isOpenSource: true
     sponsor: "Terminally Lazy"
