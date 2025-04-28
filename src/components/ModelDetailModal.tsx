@@ -156,6 +156,7 @@ export default function ModelDetailModal({ model, onClose }: ModelDetailModalPro
                 <span className="detail-value">{model.details.avg_retries_per_test}</span>
               </div>
             )}
+
             {model.details.retry_rate_percent !== undefined && (
               <div className="detail-item">
                 <span className="detail-label">Retry Rate:</span>
@@ -163,6 +164,53 @@ export default function ModelDetailModal({ model, onClose }: ModelDetailModalPro
               </div>
             )}
           </div>
+          {(model.details.total_tokens !== undefined ||
+            model.details.prompt_tokens !== undefined ||
+            model.details.completion_tokens !== undefined ||
+            model.details.avg_prompt_tokens_per_case !== undefined ||
+            model.details.avg_completion_tokens_per_case !== undefined ||
+            model.details.avg_total_tokens_per_case !== undefined) && (
+            <div className="detail-section">
+              <h3>Token Usage</h3>
+              {model.details.total_tokens !== undefined && (
+                <div className="detail-item">
+                  <span className="detail-label">Total Tokens:</span>
+                  <span className="detail-value" title="Total tokens consumed for the entire benchmark run">{model.details.total_tokens.toLocaleString()}</span>
+                </div>
+              )}
+              {model.details.prompt_tokens !== undefined && (
+                <div className="detail-item">
+                  <span className="detail-label">Prompt Tokens:</span>
+                  <span className="detail-value">{model.details.prompt_tokens.toLocaleString()}</span>
+                </div>
+              )}
+              {model.details.completion_tokens !== undefined && (
+                <div className="detail-item">
+                  <span className="detail-label">Completion Tokens:</span>
+                  <span className="detail-value">{model.details.completion_tokens.toLocaleString()}</span>
+                </div>
+              )}
+              {model.details.avg_prompt_tokens_per_case !== undefined && (
+                <div className="detail-item">
+                  <span className="detail-label">Avg Prompt Tokens Per Case:</span>
+                  <span className="detail-value">{model.details.avg_prompt_tokens_per_case.toLocaleString()}</span>
+                </div>
+              )}
+              {model.details.avg_completion_tokens_per_case !== undefined && (
+                <div className="detail-item">
+                  <span className="detail-label">Avg Completion Tokens Per Case:</span>
+                  <span className="detail-value">{model.details.avg_completion_tokens_per_case.toLocaleString()}</span>
+                </div>
+              )}
+              {model.details.avg_total_tokens_per_case !== undefined && (
+                <div className="detail-item">
+                  <span className="detail-label">Avg Total Tokens Per Case:</span>
+                  <span className="detail-value">{model.details.avg_total_tokens_per_case.toLocaleString()}</span>
+                </div>
+              )}
+            </div>
+          )}
+
           <div className="detail-section">
             <h3>Error Analysis</h3>
             <div className="detail-item">

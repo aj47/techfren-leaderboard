@@ -289,39 +289,43 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                 className={`clickable-row ${index < 3 ? 'highlight-row' : ''}`}
                 onClick={() => showDetails(model)}
               >
-                <td className="rank">{index + 1}</td>
+                <td className="rank">
+                  <span className="cell-content">{index + 1}</span>
+                </td>
                 <td className="model">
-                  {model.name}
-                  {model.details.edit_format === "architect" && (
-                    <span className="architect-badge" data-tooltip="Architect mode with editor model">A</span>
-                  )}
-                  {model.details.edit_format === "whole" && (
-                    <span className="whole-badge" data-tooltip="Whole format mode">W</span>
-                  )}
-                  {model.details.reasoning_effort && (
-                    <span
-                      className={`reasoning-badge reasoning-${model.details.reasoning_effort.toLowerCase()}`}
-                      data-tooltip={`Reasoning effort: ${model.details.reasoning_effort}`}
-                    >
-                      R
-                    </span>
-                  )}
-                  {model.details.isOpenSource !== undefined && (
-                    <span
-                      className={`opensource-badge ${model.details.isOpenSource ? 'opensource-true' : 'opensource-false'}`}
-                      data-tooltip={model.details.isOpenSource ? 'Open Source Model' : 'Proprietary Model'}
-                    >
-                      {model.details.isOpenSource ? 'OS' : 'P'}
-                    </span>
-                  )}
-                  {model.details.sponsor && (
-                    <span
-                      className="sponsor-badge"
-                      data-tooltip={`Sponsored by: ${model.details.sponsor}`}
-                    >
-                      S
-                    </span>
-                  )}
+                  <span className="cell-content">
+                    {model.name}
+                    {model.details.edit_format === "architect" && (
+                      <span className="architect-badge" data-tooltip="Architect mode with editor model">A</span>
+                    )}
+                    {model.details.edit_format === "whole" && (
+                      <span className="whole-badge" data-tooltip="Whole format mode">W</span>
+                    )}
+                    {model.details.reasoning_effort && (
+                      <span
+                        className={`reasoning-badge reasoning-${model.details.reasoning_effort.toLowerCase()}`}
+                        data-tooltip={`Reasoning effort: ${model.details.reasoning_effort}`}
+                      >
+                        R
+                      </span>
+                    )}
+                    {model.details.isOpenSource !== undefined && (
+                      <span
+                        className={`opensource-badge ${model.details.isOpenSource ? 'opensource-true' : 'opensource-false'}`}
+                        data-tooltip={model.details.isOpenSource ? 'Open Source Model' : 'Proprietary Model'}
+                      >
+                        {model.details.isOpenSource ? 'OS' : 'P'}
+                      </span>
+                    )}
+                    {model.details.sponsor && (
+                      <span
+                        className="sponsor-badge"
+                        data-tooltip={`Sponsored by: ${model.details.sponsor}`}
+                      >
+                        S
+                      </span>
+                    )}
+                  </span>
                 </td>
                 <td className="passRate">
                   <div className="progress-bar">
@@ -350,7 +354,9 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                     <span className="progress-text">{(model.speed / 1000).toFixed(1)}s</span>
                   </div>
                 </td>
-                <td className="cost">${model.cost.toFixed(3)}</td>
+                <td className="cost">
+                  <span className="cell-content">${model.cost.toFixed(3)}</span>
+                </td>
               </tr>
             ))}
           </tbody>

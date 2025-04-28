@@ -424,3 +424,49 @@
     total_cost: 0.0000
     isOpenSource: true
     sponsor: "Terminally Lazy"
+
+- id: 11
+  name: "GPT-4.1-mini"
+  passRate: 35.7
+  speed: 40600
+  cost: 2.17
+  details:
+    dirname: "2025-04-28-18-13-41--gpt4.1-mini"
+    test_cases: 224
+    model: "openrouter/openai/gpt-4.1-mini"
+    edit_format: "diff"
+    commit_hash: "3a93da8-dirty"
+    pass_rate_1: 12.9
+    pass_rate_2: 35.7
+    pass_num_1: 29
+    pass_num_2: 80
+    percent_cases_well_formed: 91.5
+    language_pass_rates:
+      cpp_pass_rate_2: 19.2
+      go_pass_rate_2: 35.9
+      java_pass_rate_2: 27.7
+      javascript_pass_rate_2: 38.8
+      python_pass_rate_2: 45.5
+      rust_pass_rate_2: 46.7
+    error_outputs: 58
+    num_malformed_responses: 58
+    num_with_malformed_responses: 19
+    user_asks: 151
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 4
+    total_tests: 225
+    command: "aider --model openrouter/openai/gpt-4.1-mini"
+    date: "2025-04-28"
+    versions: "0.82.3.dev"
+    seconds_per_case: 40.6
+    total_cost: 2.17
+    prompt_tokens: 3145189
+    completion_tokens: 360550
+    total_tokens: 3505739
+    avg_prompt_tokens_per_case: 14041.0
+    avg_completion_tokens_per_case: 1609.6
+    avg_total_tokens_per_case: 15650.6
+    isOpenSource: false

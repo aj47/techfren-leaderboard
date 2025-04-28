@@ -301,53 +301,101 @@ tbody tr:hover {
   position: relative;
 }
 
-.architect-badge, .whole-badge, .reasoning-badge, .opensource-badge, .sponsor-badge {
+/* Ensure all table cells have proper alignment for the new cell-content */
+td {
+  text-align: center;
+}
+
+/* Special handling for model column which should be left-aligned */
+td.model {
+  text-align: left;
+}
+
+/* Make cell-content in model column wider */
+td.model .cell-content {
   display: inline-block;
-  background-color: var(--primary);
+  width: auto;
+  max-width: 100%;
+  text-align: left;
+}
+
+.architect-badge, .whole-badge, .reasoning-badge, .opensource-badge, .sponsor-badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   color: var(--background);
   font-weight: bold;
   font-size: 0.7rem;
-  width: 18px;
-  height: 18px;
-  line-height: 18px;
+  width: 20px;
+  height: 20px;
   text-align: center;
-  border-radius: 50%;
+  border-radius: 6px;
   margin-left: 8px;
   vertical-align: middle;
   cursor: help;
   position: relative;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  transform: translateZ(0);
+  animation: badgePulse 3s infinite ease-in-out;
+}
+
+.architect-badge {
+  background: linear-gradient(135deg, #00ff00, #008800);
 }
 
 .whole-badge {
-  background-color: var(--secondary);
+  background: linear-gradient(135deg, #00ffff, #0088ff);
 }
 
 .reasoning-badge {
-  background-color: #ff9800; /* Orange for default */
+  background: linear-gradient(135deg, #ff9800, #ff5722); /* Orange for default */
 }
 
 .reasoning-low {
-  background-color: #f44336; /* Red for low */
+  background: linear-gradient(135deg, #f44336, #d32f2f); /* Red for low */
 }
 
 .reasoning-medium {
-  background-color: #ff9800; /* Orange for medium */
+  background: linear-gradient(135deg, #ff9800, #f57c00); /* Orange for medium */
 }
 
 .reasoning-high {
-  background-color: #4caf50; /* Green for high */
+  background: linear-gradient(135deg, #4caf50, #2e7d32); /* Green for high */
 }
 
 .opensource-true {
-  background-color: #4caf50; /* Green for open source */
+  background: linear-gradient(135deg, #4caf50, #2e7d32); /* Green for open source */
 }
 
 .opensource-false {
-  background-color: #f44336; /* Red for proprietary */
+  background: linear-gradient(135deg, #f44336, #d32f2f); /* Red for proprietary */
 }
 
 .sponsor-badge {
-  background-color: #9c27b0; /* Purple for sponsored */
+  background: linear-gradient(135deg, #9c27b0, #7b1fa2); /* Purple for sponsored */
+}
+
+@keyframes badgePulse {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Animation is now applied directly in the main badge selector */
+
+.architect-badge:hover, .whole-badge:hover, .reasoning-badge:hover,
+.opensource-badge:hover, .sponsor-badge:hover {
+  transform: scale(1.1) translateZ(0);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  animation: none;
 }
 
 /* Badge tooltips */
@@ -360,25 +408,27 @@ tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.95);
   color: var(--text);
   text-align: center;
-  border-radius: 6px;
-  padding: 8px 10px;
+  border-radius: 8px;
+  padding: 8px 12px;
   font-size: 0.75rem;
   font-weight: normal;
   white-space: nowrap;
-  border: 1px solid var(--primary-dark);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), 0 0 5px rgba(0, 255, 0, 0.2);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition: all 0.3s ease;
   z-index: 1000;
   pointer-events: none;
   width: max-content;
-  max-width: 200px;
+  max-width: 220px;
+  backdrop-filter: blur(2px);
 }
 
 .architect-badge:hover::after, .whole-badge:hover::after, .reasoning-badge:hover::after, .opensource-badge:hover::after, .sponsor-badge:hover::after {
   visibility: visible;
   opacity: 1;
+  bottom: 160%;
 }
 
 /* Arrow for tooltips */
@@ -388,12 +438,13 @@ tbody tr:hover {
   top: -20px;
   left: 50%;
   transform: translateX(-50%);
-  border-width: 5px;
+  border-width: 6px;
   border-style: solid;
-  border-color: var(--primary-dark) transparent transparent transparent;
+  border-color: rgba(0, 255, 0, 0.3) transparent transparent transparent;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.2));
 }
 
 .architect-badge:hover::before, .whole-badge:hover::before, .reasoning-badge:hover::before, .opensource-badge:hover::before, .sponsor-badge:hover::before {
@@ -401,7 +452,7 @@ tbody tr:hover {
   opacity: 1;
 }
 
-.passRate, .speed, .cost {
+.passRate, .speed, .cost, .tokens {
   min-width: 100px;
 }
 
@@ -410,7 +461,7 @@ tbody tr:hover {
     min-width: 100px;
   }
 
-  .passRate, .speed, .cost {
+  .passRate, .speed, .cost, .tokens {
     min-width: 70px;
   }
 }
@@ -420,9 +471,21 @@ tbody tr:hover {
     min-width: 80px;
   }
 
-  .passRate, .speed, .cost {
+  .passRate, .speed, .cost, .tokens {
     min-width: 50px;
   }
+}
+
+/* Tokens display styles */
+.tokens-display {
+  width: 100%;
+  background-color: transparent;
+  border-radius: 5px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .progress-bar {
@@ -453,6 +516,29 @@ tbody tr:hover {
   transition: color 0.3s ease;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+/* Styled cell content for all table cells */
+.cell-content {
+  display: inline-block;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.65);
+  padding: 2px 8px;
+  border-radius: 5px;
+  color: #ffffff;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  text-align: center;
+}
+
+/* Ensure badges inside cell-content are properly positioned */
+.cell-content .architect-badge,
+.cell-content .whole-badge,
+.cell-content .reasoning-badge,
+.cell-content .opensource-badge,
+.cell-content .sponsor-badge {
+  margin-left: 5px;
+  vertical-align: middle;
 }
 
 /* Speed progress bar styles */
@@ -818,15 +904,19 @@ footer {
   }
 
   .passRate {
-    width: 25%;
+    width: 20%;
   }
 
   .speed {
-    width: 25%;
+    width: 20%;
   }
 
   .cost {
     width: 15%;
+  }
+
+  .tokens {
+    width: 20%;
   }
 
   /* Adjust progress bars for mobile */
@@ -834,7 +924,7 @@ footer {
     height: 18px;
   }
 
-  .progress-text {
+  .progress-text, .cell-content {
     font-size: 0.8rem;
     padding: 1px 6px;
   }
@@ -895,7 +985,7 @@ footer {
   }
 
   /* Make sure all important columns are visible */
-  .passRate, .speed, .cost {
+  .passRate, .speed, .cost, .tokens {
     width: auto;
   }
 
@@ -904,7 +994,7 @@ footer {
     height: 16px;
   }
 
-  .progress-text {
+  .progress-text, .cell-content {
     font-size: 0.7rem;
     padding: 1px 4px;
   }

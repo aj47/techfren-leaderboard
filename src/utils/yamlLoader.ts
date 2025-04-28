@@ -45,6 +45,14 @@ export interface ModelDetails {
   seconds_per_case: number;
   total_cost: number;
 
+  // Token usage fields
+  prompt_tokens?: number;
+  completion_tokens?: number;
+  total_tokens?: number;
+  avg_prompt_tokens_per_case?: number;
+  avg_completion_tokens_per_case?: number;
+  avg_total_tokens_per_case?: number;
+
   // New fields for DeepSeek model
   total_api_calls?: number;
   total_retries?: number;
@@ -71,6 +79,7 @@ export interface Model {
   passRate: number;
   speed: number;
   cost: number;
+  totalTokens: number;
   details: ModelDetails;
 }
 
@@ -81,6 +90,12 @@ export function loadModels(): Model[] {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     console.log('YAML file contents loaded, length:', fileContents.length);
     const models = yaml.load(fileContents) as Model[];
+
+    // Set totalTokens field for each model
+    models.forEach(model => {
+      model.totalTokens = model.details.total_tokens || 0;
+    });
+
     console.log('Parsed models:', models);
     return models;
   } catch (error) {
