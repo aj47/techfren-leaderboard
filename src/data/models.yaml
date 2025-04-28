@@ -470,3 +470,50 @@
     avg_completion_tokens_per_case: 1609.6
     avg_total_tokens_per_case: 15650.6
     isOpenSource: false
+
+- id: 12
+  name: "Grok-3-mini-beta"
+  passRate: 22.2
+  speed: 68800
+  cost: 1.01
+  details:
+    dirname: "2025-04-28-18-55-02--grok3-mini-diff"
+    test_cases: 225
+    model: "openrouter/x-ai/grok-3-mini-beta"
+    edit_format: "diff"
+    commit_hash: "3a93da8-dirty"
+    reasoning_effort: "high"
+    pass_rate_1: 8.9
+    pass_rate_2: 22.2
+    pass_num_1: 20
+    pass_num_2: 50
+    percent_cases_well_formed: 83.6
+    language_pass_rates:
+      cpp_pass_rate_2: 11.5
+      go_pass_rate_2: 23.1
+      java_pass_rate_2: 19.1
+      javascript_pass_rate_2: 32.7
+      python_pass_rate_2: 17.6
+      rust_pass_rate_2: 23.3
+    error_outputs: 54
+    num_malformed_responses: 48
+    num_with_malformed_responses: 37
+    user_asks: 141
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 5
+    total_tests: 225
+    command: "aider --model openrouter/x-ai/grok-3-mini-beta"
+    date: "2025-04-28"
+    versions: "0.82.3.dev"
+    seconds_per_case: 68.8
+    total_cost: 1.0100
+    prompt_tokens: 2924060
+    completion_tokens: 265520
+    total_tokens: 3189580
+    avg_prompt_tokens_per_case: 12995.8
+    avg_completion_tokens_per_case: 1180.1
+    avg_total_tokens_per_case: 14175.9
+    isOpenSource: false
