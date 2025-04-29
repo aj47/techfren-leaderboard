@@ -564,3 +564,37 @@
     avg_completion_tokens_per_case: 9358.5
     avg_total_tokens_per_case: 19765.04
     isOpenSource: true
+
+- id: 14
+  name: "Qwen3 30B"
+  passRate: 39.6
+  speed: 192300
+  cost: 1.364
+  details:
+    dirname: "2025-04-29-18-12-10--qwen3-30b-a3b"
+    test_cases: 225
+    model: "openrouter/qwen/qwen3-30b-a3b"
+    edit_format: "diff"
+    commit_hash: "e205629"
+    pass_rate_1: 13.3
+    pass_rate_2: 39.6
+    pass_num_1: 30
+    pass_num_2: 89
+    percent_cases_well_formed: 82.7
+    error_outputs: 85
+    num_malformed_responses: 54
+    num_with_malformed_responses: 39
+    user_asks: 93
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 2
+    test_timeouts: 2
+    total_tests: 225
+    command: "aider --model openrouter/qwen/qwen3-30b-a3b"
+    date: "2025-04-29"
+    versions: "0.82.3.dev"
+    seconds_per_case: 192.3
+    total_cost: 1.364
+    isOpenSource: true
+    sponsor: "github.com/lu4p"
