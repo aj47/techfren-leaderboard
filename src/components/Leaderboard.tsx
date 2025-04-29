@@ -16,6 +16,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedModel, setSelectedModel] = useState<Model | null>(null);
   const [currentDate, setCurrentDate] = useState('');
+  const [viewMode, setViewMode] = useState<'simple' | 'detailed'>('simple');
 
   useEffect(() => {
     // Get the most recent date from model entries
@@ -102,26 +103,8 @@ export default function Leaderboard({ models }: LeaderboardProps) {
 
         if (!progressElement || !textElement) return;
 
-        const progressWidth = parseFloat(progressElement.style.width);
-        const barWidth = (bar as HTMLElement).offsetWidth;
-        const textWidth = textElement.offsetWidth;
-
-        // Calculate the center position of the text
-        const textCenter = barWidth / 2;
-
-        // Calculate the right edge of the progress bar
-        const progressRightEdge = (progressWidth / 100) * barWidth;
-
-        // Determine if the text is mostly over the colored part of the progress bar
-        const textLeftEdge = textCenter - (textWidth / 2);
-        const textRightEdge = textCenter + (textWidth / 2);
-
-        // Calculate how much of the text is over the colored part
-        const overlapStart = Math.max(textLeftEdge, 0);
-        const overlapEnd = Math.min(textRightEdge, progressRightEdge);
-        const overlapWidth = Math.max(0, overlapEnd - overlapStart);
-
-        // Text color is now handled by CSS with background blocks
+        // Skip the rest of the calculations since text color is now handled by CSS
+        // This avoids potential errors with elements that might not exist
       });
     };
 
@@ -151,7 +134,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
       };
 
       // Show tooltip on hover for desktop
-      speedHeader.addEventListener('mouseenter', (e) => {
+      speedHeader.addEventListener('mouseenter', () => {
         // Don't prevent default to allow the click for sorting
         const rect = (speedHeader as HTMLElement).getBoundingClientRect();
         positionTooltip(rect);
@@ -164,7 +147,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
       });
 
       // For mobile: show on tap, but don't interfere with sorting
-      speedHeader.addEventListener('touchstart', (e) => {
+      speedHeader.addEventListener('touchstart', () => {
         // Don't prevent default to allow the click for sorting
         const rect = (speedHeader as HTMLElement).getBoundingClientRect();
         positionTooltip(rect);
@@ -190,7 +173,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
     return () => {
       window.removeEventListener('resize', updateProgressTextColors);
     };
-  }, [sortedModels]);
+  }, [sortedModels, viewMode]);
 
   return (
     <>
@@ -204,49 +187,66 @@ export default function Leaderboard({ models }: LeaderboardProps) {
         <ModelDetailModal model={selectedModel} onClose={closeDetailModal} />
       )}
 
-      <div className="language-dropdown-container">
-        <div className="language-dropdown">
-          <button className="language-dropdown-button">
-            Language: {selectedLanguage || 'All Languages'}
+      <div className="controls-container">
+        <div className="view-toggle-container">
+          <button
+            className={`view-toggle-button ${viewMode === 'simple' ? 'active' : ''}`}
+            onClick={() => setViewMode('simple')}
+          >
+            Simple View
           </button>
-          <div className="language-dropdown-content">
-            <button onClick={() => sortBy('passRate', null)}
-              className={selectedLanguage === null ? 'active' : ''}>
-              All Languages {sortColumn === 'passRate' && selectedLanguage === null ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+          <button
+            className={`view-toggle-button ${viewMode === 'detailed' ? 'active' : ''}`}
+            onClick={() => setViewMode('detailed')}
+          >
+            Detailed View
+          </button>
+        </div>
+
+        <div className="language-dropdown-container">
+          <div className="language-dropdown">
+            <button className="language-dropdown-button">
+              Language: {selectedLanguage || 'All Languages'}
             </button>
-            <button onClick={() => sortBy('passRate', 'JavaScript')}
-              className={selectedLanguage === 'JavaScript' ? 'active' : ''}>
-              JavaScript {sortColumn === 'passRate' && selectedLanguage === 'JavaScript' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-            </button>
-            <button onClick={() => sortBy('passRate', 'Python')}
-              className={selectedLanguage === 'Python' ? 'active' : ''}>
-              Python {sortColumn === 'passRate' && selectedLanguage === 'Python' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-            </button>
-            <button onClick={() => sortBy('passRate', 'Java')}
-              className={selectedLanguage === 'Java' ? 'active' : ''}>
-              Java {sortColumn === 'passRate' && selectedLanguage === 'Java' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-            </button>
-            <button onClick={() => sortBy('passRate', 'Cpp')}
-              className={selectedLanguage === 'Cpp' ? 'active' : ''}>
-              C++ {sortColumn === 'passRate' && selectedLanguage === 'Cpp' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-            </button>
-            <button onClick={() => sortBy('passRate', 'Go')}
-              className={selectedLanguage === 'Go' ? 'active' : ''}>
-              Go {sortColumn === 'passRate' && selectedLanguage === 'Go' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-            </button>
-            <button onClick={() => sortBy('passRate', 'Rust')}
-              className={selectedLanguage === 'Rust' ? 'active' : ''}>
-              Rust {sortColumn === 'passRate' && selectedLanguage === 'Rust' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
-            </button>
+            <div className="language-dropdown-content">
+              <button onClick={() => sortBy('passRate', null)}
+                className={selectedLanguage === null ? 'active' : ''}>
+                All Languages {sortColumn === 'passRate' && selectedLanguage === null ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'JavaScript')}
+                className={selectedLanguage === 'JavaScript' ? 'active' : ''}>
+                JavaScript {sortColumn === 'passRate' && selectedLanguage === 'JavaScript' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Python')}
+                className={selectedLanguage === 'Python' ? 'active' : ''}>
+                Python {sortColumn === 'passRate' && selectedLanguage === 'Python' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Java')}
+                className={selectedLanguage === 'Java' ? 'active' : ''}>
+                Java {sortColumn === 'passRate' && selectedLanguage === 'Java' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Cpp')}
+                className={selectedLanguage === 'Cpp' ? 'active' : ''}>
+                C++ {sortColumn === 'passRate' && selectedLanguage === 'Cpp' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Go')}
+                className={selectedLanguage === 'Go' ? 'active' : ''}>
+                Go {sortColumn === 'passRate' && selectedLanguage === 'Go' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+              <button onClick={() => sortBy('passRate', 'Rust')}
+                className={selectedLanguage === 'Rust' ? 'active' : ''}>
+                Rust {sortColumn === 'passRate' && selectedLanguage === 'Rust' ? (sortDirection === 'asc' ? '↑' : '↓') : ''}
+              </button>
+            </div>
           </div>
         </div>
       </div>
       <div className="helper-text">
-        Click on column headers to sort. Click on a row to see detailed results.
+        Toggle between simple and detailed views. Click on column headers to sort. Click on a row to see full details.
       </div>
 
       <div className="leaderboard-container">
-        <table className="leaderboard">
+        <table className={`leaderboard ${viewMode === 'detailed' ? 'detailed-view' : 'simple-view'}`}>
           <thead>
             <tr>
               <th className="rank">Rank</th>
@@ -280,6 +280,16 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                   <span className="sort-indicator">{sortDirection === 'asc' ? '↑' : '↓'}</span>
                 )}
               </th>
+
+              {viewMode === 'detailed' && (
+                <>
+                  <th className="pass-rate-first">Pass Rate (First)</th>
+                  <th className="date">Date</th>
+                  <th className="error-outputs">Error Outputs</th>
+                  <th className="timeouts">Timeouts</th>
+                  <th className="malformed">Malformed</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -295,38 +305,42 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                 <td className="model">
                   <span className="cell-content">
                     {model.name}
-                    {model.details.edit_format === "architect" && (
-                      <span className="architect-badge model-badge" data-tooltip="Architect mode with editor model">A</span>
-                    )}
-                    {model.details.edit_format === "whole" && (
-                      <span className="whole-badge model-badge" data-tooltip="Whole format mode">W</span>
-                    )}
-                    {model.details.edit_format === "diff" && (
-                      <span className="diff-badge model-badge" data-tooltip="Diff format mode">D</span>
-                    )}
-                    {model.details.reasoning_effort && (
-                      <span
-                        className={`reasoning-badge reasoning-${model.details.reasoning_effort.toLowerCase()} model-badge`}
-                        data-tooltip={`Reasoning effort: ${model.details.reasoning_effort}`}
-                      >
-                        R
-                      </span>
-                    )}
-                    {model.details.isOpenSource !== undefined && (
-                      <span
-                        className={`opensource-badge ${model.details.isOpenSource ? 'opensource-true' : 'opensource-false'} model-badge`}
-                        data-tooltip={model.details.isOpenSource ? 'Open Source Model' : 'Proprietary Model'}
-                      >
-                        {model.details.isOpenSource ? 'OS' : 'P'}
-                      </span>
-                    )}
-                    {model.details.sponsor && (
-                      <span
-                        className="sponsor-badge model-badge"
-                        data-tooltip={`Sponsored by: ${model.details.sponsor}`}
-                      >
-                        S
-                      </span>
+                    {viewMode === 'detailed' && (
+                      <>
+                        {model.details.edit_format === "architect" && (
+                          <span className="architect-badge model-badge" data-tooltip="Architect mode with editor model">A</span>
+                        )}
+                        {model.details.edit_format === "whole" && (
+                          <span className="whole-badge model-badge" data-tooltip="Whole format mode">W</span>
+                        )}
+                        {model.details.edit_format === "diff" && (
+                          <span className="diff-badge model-badge" data-tooltip="Diff format mode">D</span>
+                        )}
+                        {model.details.reasoning_effort && (
+                          <span
+                            className={`reasoning-badge reasoning-${model.details.reasoning_effort.toLowerCase()} model-badge`}
+                            data-tooltip={`Reasoning effort: ${model.details.reasoning_effort}`}
+                          >
+                            R
+                          </span>
+                        )}
+                        {model.details.isOpenSource !== undefined && (
+                          <span
+                            className={`opensource-badge ${model.details.isOpenSource ? 'opensource-true' : 'opensource-false'} model-badge`}
+                            data-tooltip={model.details.isOpenSource ? 'Open Source Model' : 'Proprietary Model'}
+                          >
+                            {model.details.isOpenSource ? 'OS' : 'P'}
+                          </span>
+                        )}
+                        {model.details.sponsor && (
+                          <span
+                            className="sponsor-badge model-badge"
+                            data-tooltip={`Sponsored by: ${model.details.sponsor}`}
+                          >
+                            S
+                          </span>
+                        )}
+                      </>
                     )}
                   </span>
                 </td>
@@ -360,6 +374,26 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                 <td className="cost">
                   <span className="cell-content">${model.cost.toFixed(3)}</span>
                 </td>
+
+                {viewMode === 'detailed' && (
+                  <>
+                    <td className="pass-rate-first">
+                      <span className="cell-content">{model.details.pass_rate_1}%</span>
+                    </td>
+                    <td className="date">
+                      <span className="cell-content">{model.details.date}</span>
+                    </td>
+                    <td className="error-outputs">
+                      <span className="cell-content">{model.details.error_outputs}</span>
+                    </td>
+                    <td className="timeouts">
+                      <span className="cell-content">{model.details.test_timeouts}</span>
+                    </td>
+                    <td className="malformed">
+                      <span className="cell-content">{model.details.num_malformed_responses}</span>
+                    </td>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>
@@ -372,7 +406,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
           <a href="https://buymeacoffee.com/techfren/e/403261" target="_blank" className="sponsor-button">
             Sponsor
           </a>
-          <span className="sponsor-info">Sponsor a model benchmark and get it marked as "sponsored by you".</span>
+          <span className="sponsor-info">Sponsor a benchmark for a model of your choice".</span>
           <span className="sponsor-info">Note: Sponsored models must have an API with sufficient rate limits.</span>
         </div>
       </footer>

@@ -265,6 +265,91 @@ main {
   flex-wrap: wrap;
 }
 
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 15px;
+}
+
+.view-toggle-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.view-toggle-button {
+  background-color: var(--background-light);
+  color: var(--text);
+  border: 1px solid var(--primary-dark);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.view-toggle-button:hover, .view-toggle-button.active {
+  background-color: var(--primary-dark);
+  color: var(--background);
+}
+
+/* Styles for detailed view table */
+.leaderboard.detailed-view {
+  font-size: 0.85rem;
+}
+
+.leaderboard.detailed-view th,
+.leaderboard.detailed-view td {
+  padding: 8px 10px;
+}
+
+.leaderboard.detailed-view .pass-rate-first,
+.leaderboard.detailed-view .date,
+.leaderboard.detailed-view .error-outputs,
+.leaderboard.detailed-view .timeouts,
+.leaderboard.detailed-view .malformed {
+  min-width: 80px;
+}
+
+@media (max-width: 1200px) {
+  .leaderboard.detailed-view {
+    font-size: 0.8rem;
+  }
+
+  .leaderboard.detailed-view th,
+  .leaderboard.detailed-view td {
+    padding: 6px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .controls-container {
+    flex-direction: column;
+  }
+
+  .view-toggle-container {
+    width: 100%;
+  }
+
+  .view-toggle-button {
+    flex: 1;
+    min-width: 0;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .leaderboard.detailed-view {
+    font-size: 0.75rem;
+  }
+
+  .leaderboard.detailed-view th,
+  .leaderboard.detailed-view td {
+    padding: 4px 6px;
+  }
+}
 
 
 .helper-text {
@@ -1247,13 +1332,34 @@ footer p {
     margin-bottom: 12px;
   }
 
-  .detail-label {
-    font-size: 0.9rem;
+  /* Detailed view adjustments for very small screens */
+  .leaderboard.detailed-view {
+    font-size: 0.65rem;
   }
 
-  .detail-value {
-    font-size: 0.9rem;
+  .leaderboard.detailed-view th,
+  .leaderboard.detailed-view td {
+    padding: 3px 4px;
   }
 
+  .view-toggle-button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
 
+  /* Hide some columns in detailed view on very small screens */
+  .leaderboard.detailed-view .date,
+  .leaderboard.detailed-view .error-outputs,
+  .leaderboard.detailed-view .timeouts,
+  .leaderboard.detailed-view .malformed {
+    display: none;
+  }
+}
+
+.detail-label {
+  font-size: 0.9rem;
+}
+
+.detail-value {
+  font-size: 0.9rem;
 }
