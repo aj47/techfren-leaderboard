@@ -296,17 +296,17 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                   <span className="cell-content">
                     {model.name}
                     {model.details.edit_format === "architect" && (
-                      <span className="architect-badge" data-tooltip="Architect mode with editor model">A</span>
+                      <span className="architect-badge model-badge" data-tooltip="Architect mode with editor model">A</span>
                     )}
                     {model.details.edit_format === "whole" && (
-                      <span className="whole-badge" data-tooltip="Whole format mode">W</span>
+                      <span className="whole-badge model-badge" data-tooltip="Whole format mode">W</span>
                     )}
                     {model.details.edit_format === "diff" && (
-                      <span className="diff-badge" data-tooltip="Diff format mode">D</span>
+                      <span className="diff-badge model-badge" data-tooltip="Diff format mode">D</span>
                     )}
                     {model.details.reasoning_effort && (
                       <span
-                        className={`reasoning-badge reasoning-${model.details.reasoning_effort.toLowerCase()}`}
+                        className={`reasoning-badge reasoning-${model.details.reasoning_effort.toLowerCase()} model-badge`}
                         data-tooltip={`Reasoning effort: ${model.details.reasoning_effort}`}
                       >
                         R
@@ -314,7 +314,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                     )}
                     {model.details.isOpenSource !== undefined && (
                       <span
-                        className={`opensource-badge ${model.details.isOpenSource ? 'opensource-true' : 'opensource-false'}`}
+                        className={`opensource-badge ${model.details.isOpenSource ? 'opensource-true' : 'opensource-false'} model-badge`}
                         data-tooltip={model.details.isOpenSource ? 'Open Source Model' : 'Proprietary Model'}
                       >
                         {model.details.isOpenSource ? 'OS' : 'P'}
@@ -322,7 +322,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
                     )}
                     {model.details.sponsor && (
                       <span
-                        className="sponsor-badge"
+                        className="sponsor-badge model-badge"
                         data-tooltip={`Sponsored by: ${model.details.sponsor}`}
                       >
                         S
@@ -368,6 +368,13 @@ export default function Leaderboard({ models }: LeaderboardProps) {
 
       <footer>
         <p>Last benchmark added: {currentDate}</p>
+        <div className="sponsor-container">
+          <a href="https://buymeacoffee.com/techfren/e/403261" target="_blank" className="sponsor-button">
+            Sponsor
+          </a>
+          <span className="sponsor-info">Sponsor a model benchmark and get it marked as "sponsored by you".</span>
+          <span className="sponsor-info">Note: Sponsored models must have an API with sufficient rate limits.</span>
+        </div>
       </footer>
     </>
   );

@@ -1144,6 +1144,11 @@ footer p {
     bottom: 120%;
   }
 
+  /* Hide badges on mobile */
+  .model-badge {
+    display: none;
+  }
+
   /* For touch devices, make tooltip appear on tap */
   .tooltip-container:active .tooltip,
   .architect-badge:active::after,

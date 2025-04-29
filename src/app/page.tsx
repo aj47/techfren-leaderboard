@@ -25,8 +25,6 @@ export default async function Home() {
           Join the community <a href="https://discord.gg/cK9WeQ7jPq" target="_blank" className="discord-link">Discord</a> to chat or submit a model for benchmarking.
           You can also submit a pull request or issue on <a href="https://github.com/aj47/techfren-leaderboard" target="_blank" className="github-link">GitHub</a>.
         </p>
-        <p className="header-info">
-        </p>
       </header>
 
       <main>
