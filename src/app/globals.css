@@ -105,6 +105,130 @@ h2 a:hover {
   text-shadow: 0 0 5px var(--secondary);
 }
 
+.sponsor-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #00ff00, #008800);
+  color: var(--background);
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  animation: pulseSponsor 2s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.sponsor-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  animation: shineEffect 3s infinite ease-in-out;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes shineEffect {
+  0% {
+    left: -50%;
+    top: -50%;
+  }
+  100% {
+    left: 150%;
+    top: 150%;
+  }
+}
+
+.sponsor-button:hover {
+  background: linear-gradient(135deg, #00ff88, #00aa00);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+  color: var(--background);
+  text-shadow: none;
+}
+
+.sponsor-button:hover::before {
+  animation: none;
+}
+
+.sponsor-info {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--text);
+  opacity: 0.9;
+  animation: sponsorInfoPulse 4s infinite ease-in-out;
+}
+
+@keyframes sponsorInfoPulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.sponsor-container {
+  margin-top: 20px;
+  text-align: center;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  border: 1px solid var(--primary-dark);
+  position: relative;
+  overflow: hidden;
+  animation: sponsorContainerGlow 5s infinite ease-in-out;
+}
+
+@keyframes sponsorContainerGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    border-color: var(--primary-dark);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+    border-color: var(--primary);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    border-color: var(--primary-dark);
+  }
+}
+
+@keyframes pulseSponsor {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    transform: scale(1);
+  }
+}
+
 .highlight {
   color: var(--primary);
 }
@@ -375,6 +499,30 @@ td.model .cell-content {
 
 .sponsor-badge {
   background: linear-gradient(135deg, #9c27b0, #7b1fa2); /* Purple for sponsored */
+  animation: sponsorBadgePulse 3s infinite ease-in-out;
+}
+
+@keyframes sponsorBadgePulse {
+  0% {
+    box-shadow: 0 0 5px rgba(156, 39, 176, 0.5);
+    transform: translateZ(0) scale(1) rotate(0deg);
+  }
+  25% {
+    box-shadow: 0 0 8px rgba(156, 39, 176, 0.7);
+    transform: translateZ(0) scale(1.15) rotate(5deg);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(156, 39, 176, 0.8);
+    transform: translateZ(0) scale(1.1) rotate(0deg);
+  }
+  75% {
+    box-shadow: 0 0 8px rgba(156, 39, 176, 0.7);
+    transform: translateZ(0) scale(1.15) rotate(-5deg);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(156, 39, 176, 0.5);
+    transform: translateZ(0) scale(1) rotate(0deg);
+  }
 }
 
 .diff-badge {
@@ -384,12 +532,15 @@ td.model .cell-content {
 @keyframes badgePulse {
   0% {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transform: translateZ(0) scale(1);
   }
   50% {
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    transform: translateZ(0) scale(1.1);
   }
   100% {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transform: translateZ(0) scale(1);
   }
 }
 
@@ -468,6 +619,15 @@ td.model .cell-content {
   .passRate, .speed, .cost, .tokens {
     min-width: 70px;
   }
+
+  .sponsor-button {
+    padding: 7px 18px;
+    margin: 5px 10px;
+  }
+
+  .sponsor-info {
+    font-size: 0.85rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -477,6 +637,24 @@ td.model .cell-content {
 
   .passRate, .speed, .cost, .tokens {
     min-width: 50px;
+  }
+
+  .sponsor-button {
+    padding: 6px 15px;
+    font-size: 0.9rem;
+    display: block;
+    margin: 10px auto;
+    max-width: 150px;
+  }
+
+  .sponsor-info {
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+
+  .sponsor-container {
+    padding: 10px;
+    margin-top: 15px;
   }
 }
 
@@ -579,6 +757,10 @@ footer {
   font-size: 0.8rem;
   color: var(--text);
   opacity: 0.7;
+}
+
+footer p {
+  margin-bottom: 15px;
 }
 
 
@@ -806,6 +988,29 @@ footer {
   text-align: right;
   word-break: break-word;
   max-width: 100%;
+}
+
+/* Special styling for sponsored by text */
+.sponsor-value {
+  color: #9c27b0;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(156, 39, 176, 0.3);
+  animation: sponsorTextGlow 3s infinite ease-in-out;
+}
+
+@keyframes sponsorTextGlow {
+  0% {
+    color: #9c27b0;
+    text-shadow: 0 0 5px rgba(156, 39, 176, 0.3);
+  }
+  50% {
+    color: #e040fb;
+    text-shadow: 0 0 10px rgba(156, 39, 176, 0.7);
+  }
+  100% {
+    color: #9c27b0;
+    text-shadow: 0 0 5px rgba(156, 39, 176, 0.3);
+  }
 }
 
 @media (max-width: 768px) {

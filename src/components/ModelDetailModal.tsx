@@ -98,7 +98,7 @@ export default function ModelDetailModal({ model, onClose }: ModelDetailModalPro
             {model.details.sponsor && (
               <div className="detail-item">
                 <span className="detail-label">Sponsored By:</span>
-                <span className="detail-value">{model.details.sponsor}</span>
+                <span className="detail-value sponsor-value">{model.details.sponsor}</span>
               </div>
             )}
           </div>
