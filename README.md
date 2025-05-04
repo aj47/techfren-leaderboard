@@ -59,14 +59,12 @@ flowchart TD
         NextBuild["Next.js Build Process"]:::build
         AppRouter["App Router (layout, page, globals)"]:::build
     end
-
     %% === Deployment Components ===
     subgraph "Deployment"
         direction TB
         StaticAssets["Static Output (out/)"]:::deploy
         Cloudflare["Cloudflare Pages + CDN"]:::deploy
     end
-
     %% === Client-Side Runtime ===
     subgraph "Client-Side (User Browser)"
         direction TB
@@ -76,12 +74,10 @@ flowchart TD
         Modal["ModelDetailModal.tsx (Event)"]:::runtime
         DigitalRain["DigitalRain.tsx (Canvas)"]:::runtime
     end
-
     %% === Relationships ===
     Dev -->|1. Commits code| GH
     GH -->|2. Triggers CI/CD| CI
     CI -->|3. Runs `next build`| NextBuild
-
     NextBuild -->|4a. Reads config| NXConfig
     NextBuild -->|4b. Reads config| TSConfig
     NextBuild -->|4c. Reads manifest| Package
@@ -92,34 +88,16 @@ flowchart TD
     YamlLoader -->|4h. Provides data| NextBuild
     NextBuild -->|5. Generates static files| StaticAssets
     StaticAssets -->|6. Deployed to| Cloudflare
-
     Cloudflare -->|7. Serves files to| Browser
     Browser -->|8. Renders HTML/CSS, runs JS| Hydration
     Hydration -->|9. Makes components interactive| Leaderboard
     Leaderboard -->|10. User clicks row| Modal
     Browser -->|11. Renders background| DigitalRain
-
-    %% === Click Events (Links to GitHub files) ===
-    %% Removed target="_blank" for compatibility
-    click NXConfig "https://github.com/aj47/techfren-leaderboard/blob/main/next.config.js"
-    click Wrangler "https://github.com/aj47/techfren-leaderboard/blob/main/wrangler.toml"
-    click StaticAssets "https://nextjs.org/docs/app/building-your-application/deploying/static-exports"
-    click AppRouter "https://github.com/aj47/techfren-leaderboard/tree/main/src/app"
-    click ModelsYAML "https://github.com/aj47/techfren-leaderboard/blob/main/src/data/models.yaml"
-    click YamlLoader "https://github.com/aj47/techfren-leaderboard/blob/main/src/utils/yamlLoader.ts"
-    click Leaderboard "https://github.com/aj47/techfren-leaderboard/blob/main/src/components/Leaderboard.tsx"
-    click Modal "https://github.com/aj47/techfren-leaderboard/blob/main/src/components/ModelDetailModal.tsx"
-    click DigitalRain "https://github.com/aj47/techfren-leaderboard/blob/main/src/components/DigitalRain.tsx"
-    click TSConfig "https://github.com/aj47/techfren-leaderboard/blob/main/tsconfig.json"
-    click IndexHTML "https://github.com/aj47/techfren-leaderboard/blob/main/index.html"
-    click Package "https://github.com/aj47/techfren-leaderboard/blob/main/package.json"
-    click Cloudflare "https://pages.cloudflare.com/"
-
-    %% === Styles (Theme Friendly) ===
-    %% Removed fill colors to use theme defaults. Kept stroke for definition.
-    classDef build stroke:#666,stroke-width:1px,color:#333
-    classDef deploy stroke:#666,stroke-width:1px,color:#333
-    classDef runtime stroke:#666,stroke-width:1px,color:#333
+    
+    %% === Dark-mode friendly styles (theme-neutral) ===
+    classDef build stroke-width:2px
+    classDef deploy stroke-width:2px
+    classDef runtime stroke-width:2px
 ```
 
 ## Project Structure
