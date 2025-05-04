@@ -39,33 +39,114 @@ It's a community-driven effort hosted by `@techfrens` / `aj47`.
 *   **Data Parsing:** [js-yaml](https://github.com/nodeca/js-yaml) library.
 *   **Deployment:** Configured for Static Site Generation (`output: 'export'`) and deployment via [Cloudflare Pages](https://pages.cloudflare.com/) (indicated by `wrangler.toml` and `public/_redirects`).
 
+## GitDiagram:
+
+```mermaid
+flowchart TD
+    %% Build-Time Components
+    subgraph "Build-Time" 
+        direction TB
+        Dev["Developer Local"]:::build
+        GH["GitHub Repo"]:::build
+        CI["CI/CD Build"]:::build
+        NXConfig["next.config.js"]:::build
+        TSConfig["tsconfig.json"]:::build
+        Package["package.json"]:::build
+        IndexHTML["index.html"]:::build
+        Wrangler["wrangler.toml"]:::build
+        ModelsYAML["models.yaml"]:::build
+        YamlLoader["yamlLoader.ts"]:::build
+        NextBuild["Next.js Build Process"]:::build
+        AppRouter["App Router (layout.tsx, page.tsx, globals.css)"]:::build
+    end
+
+    %% Deployment Components
+    subgraph "Deployment" 
+        direction TB
+        StaticAssets["public/"]:::deploy
+        Cloudflare["Cloudflare Pages + CDN"]:::deploy
+    end
+
+    %% Client-Side Runtime
+    subgraph "Client-Side" 
+        direction TB
+        Browser["User Browser"]:::runtime
+        Leaderboard["Leaderboard.tsx"]:::runtime
+        Modal["ModelDetailModal.tsx"]:::runtime
+        DigitalRain["DigitalRain.tsx"]:::runtime
+    end
+
+    %% Relationships
+    Dev -->|commits code| GH
+    GH -->|triggers| CI
+    CI -->|runs build| NextBuild
+    NextBuild -->|reads config| NXConfig
+    NextBuild -->|reads config| TSConfig
+    NextBuild -->|reads manifest| Package
+    NextBuild -->|reads fallback| IndexHTML
+    NextBuild -->|reads deploy config| Wrangler
+    NextBuild -->|loads data| ModelsYAML
+    NextBuild -->|parses YAML| YamlLoader
+    YamlLoader -->|provides props| NextBuild
+    NextBuild -->|uses app router| AppRouter
+    NextBuild -->|outputs| StaticAssets
+    StaticAssets --> Cloudflare
+    Cloudflare -->|serves static files| Browser
+    Browser -->|hydrates| Leaderboard
+    Browser -->|opens modal| Modal
+    Browser -->|renders effect| DigitalRain
+
+    %% Click Events
+    click NXConfig "https://github.com/rsrini7/techfren-leaderboard/blob/main/next.config.js"
+    click Wrangler "https://github.com/rsrini7/techfren-leaderboard/blob/main/wrangler.toml"
+    click StaticAssets "https://github.com/rsrini7/techfren-leaderboard/tree/main/public/"
+    click AppRouter "https://github.com/rsrini7/techfren-leaderboard/blob/main/src/app/layout.tsx"
+    click AppRouter "https://github.com/rsrini7/techfren-leaderboard/blob/main/src/app/page.tsx"
+    click AppRouter "https://github.com/rsrini7/techfren-leaderboard/blob/main/src/app/globals.css"
+    click ModelsYAML "https://github.com/rsrini7/techfren-leaderboard/blob/main/src/data/models.yaml"
+    click YamlLoader "https://github.com/rsrini7/techfren-leaderboard/blob/main/src/utils/yamlLoader.ts"
+    click Leaderboard "https://github.com/rsrini7/techfren-leaderboard/blob/main/src/components/Leaderboard.tsx"
+    click Modal "https://github.com/rsrini7/techfren-leaderboard/blob/main/src/components/ModelDetailModal.tsx"
+    click DigitalRain "https://github.com/rsrini7/techfren-leaderboard/blob/main/src/components/DigitalRain.tsx"
+    click TSConfig "https://github.com/rsrini7/techfren-leaderboard/blob/main/tsconfig.json"
+    click IndexHTML "https://github.com/rsrini7/techfren-leaderboard/blob/main/index.html"
+    click Package "https://github.com/rsrini7/techfren-leaderboard/blob/main/package.json"
+
+    %% Styles
+    classDef build fill:#ADD8E6,stroke:#000,stroke-width:1px
+    classDef deploy fill:#90EE90,stroke:#000,stroke-width:1px
+    classDef runtime fill:#FFFACD,stroke:#000,stroke-width:1px
+```
+
 ## Project Structure
 
+```text
 aj47-techfren-leaderboard/
-├── .npmrc # NPM configuration (disables package-lock)
-├── index.html # (Likely unused by Next.js build) Alternative Vue.js implementation
-├── LICENSE # Project license file (MIT)
-├── next-env.d.ts # Next.js TypeScript environment definitions
-├── next.config.js # Next.js configuration (static export)
-├── package.json # Project dependencies and scripts
-├── tsconfig.json # TypeScript configuration
-├── wrangler.toml # Cloudflare Pages build configuration
-├── public/ # Static assets served directly
-│ ├── _redirects # Cloudflare Pages redirect rules for SPA routing
-│ └── robots.txt # Instructions for web crawlers
-└── src/ # Main application source code
-├── app/ # Next.js App Router directory
-│ ├── globals.css # Global styles (Tailwind CSS)
-│ ├── layout.tsx # Root layout component
-│ └── page.tsx # Main page component for the leaderboard
-├── components/ # Reusable React components
-│ ├── DigitalRain.tsx # Canvas background effect
-│ ├── Leaderboard.tsx # Interactive leaderboard table
-│ └── ModelDetailModal.tsx # Modal for showing model details
-├── data/ # Data files
-│ └── models.yaml # LLM benchmark data
-└── utils/ # Utility functions
-└── yamlLoader.ts # Function to load and parse YAML data at build time
+├── .npmrc                # NPM configuration (disables package-lock)
+├── index.html            # (Likely unused by Next.js build) Alternative Vue.js implementation
+├── LICENSE               # Project license file (MIT)
+├── next-env.d.ts         # Next.js TypeScript environment definitions
+├── next.config.js        # Next.js configuration (static export)
+├── package.json          # Project dependencies and scripts
+├── tsconfig.json         # TypeScript configuration
+├── wrangler.toml         # Cloudflare Pages build configuration
+├── public/               # Static assets served directly
+│   ├── _redirects        # Cloudflare Pages redirect rules for SPA routing
+│   └── robots.txt        # Instructions for web crawlers
+└── src/                  # Main application source code
+    ├── app/              # Next.js App Router directory
+    │   ├── globals.css   # Global styles (Tailwind CSS)
+    │   ├── layout.tsx    # Root layout component
+    │   └── page.tsx      # Main page component for the leaderboard
+    ├── components/       # Reusable React components
+    │   ├── DigitalRain.tsx       # Canvas background effect
+    │   ├── Leaderboard.tsx       # Interactive leaderboard table
+    │   └── ModelDetailModal.tsx  # Modal for showing model details
+    ├── data/             # Data files
+    │   └── models.yaml   # LLM benchmark data
+    └── utils/            # Utility functions
+        └── yamlLoader.ts # Function to load and parse YAML data at build time
+```
 
 ## Data Source
 
