@@ -42,18 +42,30 @@ It's a community-driven effort hosted by `@techfrens` / `aj47`.
 ## Project Structure
 
 aj47-techfren-leaderboard/
-├── public/ # Static assets (robots.txt, _redirects)
-├── src/
-│ ├── app/ # Next.js App Router (layout, page, global CSS)
-│ ├── components/ # Reusable React components (Leaderboard, Modal, DigitalRain)
-│ ├── data/ # Data files (models.yaml)
-│ └── utils/ # Utility functions (yamlLoader.ts)
+├── .npmrc # NPM configuration (disables package-lock)
+├── index.html # (Likely unused by Next.js build) Alternative Vue.js implementation
+├── LICENSE # Project license file (MIT)
+├── next-env.d.ts # Next.js TypeScript environment definitions
 ├── next.config.js # Next.js configuration (static export)
 ├── package.json # Project dependencies and scripts
 ├── tsconfig.json # TypeScript configuration
 ├── wrangler.toml # Cloudflare Pages build configuration
-└── README.md # This file
-
+├── public/ # Static assets served directly
+│ ├── _redirects # Cloudflare Pages redirect rules for SPA routing
+│ └── robots.txt # Instructions for web crawlers
+└── src/ # Main application source code
+├── app/ # Next.js App Router directory
+│ ├── globals.css # Global styles (Tailwind CSS)
+│ ├── layout.tsx # Root layout component
+│ └── page.tsx # Main page component for the leaderboard
+├── components/ # Reusable React components
+│ ├── DigitalRain.tsx # Canvas background effect
+│ ├── Leaderboard.tsx # Interactive leaderboard table
+│ └── ModelDetailModal.tsx # Modal for showing model details
+├── data/ # Data files
+│ └── models.yaml # LLM benchmark data
+└── utils/ # Utility functions
+└── yamlLoader.ts # Function to load and parse YAML data at build time
 
 ## Data Source
 
