@@ -598,3 +598,43 @@
     total_cost: 1.364
     isOpenSource: true
     sponsor: "github.com/lu4p"
+
+- id: 15
+  name: "DeepSeek R1"
+  passRate: 71.6
+  speed: 330100
+  cost: 8.020
+  details:
+    dirname: "2025-05-29-16-44-14--r1-0528-or-dee"
+    test_cases: 225
+    model: "openrouter/deepseek/deepseek-r1-0528"
+    edit_format: "diff"
+    commit_hash: "3a93da8-dirty"
+    pass_rate_1: 32.9
+    pass_rate_2: 71.6
+    pass_num_1: 74
+    pass_num_2: 161
+    percent_cases_well_formed: 92.0
+    language_pass_rates:
+      cpp_pass_rate_2: 80.8
+      go_pass_rate_2: 71.8
+      java_pass_rate_2: 63.8
+      javascript_pass_rate_2: 69.4
+      python_pass_rate_2: 82.4
+      rust_pass_rate_2: 66.7
+    error_outputs: 40
+    num_malformed_responses: 34
+    num_with_malformed_responses: 18
+    user_asks: 105
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 1
+    test_timeouts: 3
+    total_tests: 225
+    command: "aider --model openrouter/deepseek/deepseek-r1-0528"
+    date: "2025-05-29"
+    versions: "0.82.3.dev"
+    seconds_per_case: 330.1
+    total_cost: 8.020
+    isOpenSource: true
