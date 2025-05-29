@@ -600,7 +600,7 @@
     sponsor: "github.com/lu4p"
 
 - id: 15
-  name: "DeepSeek R1"
+  name: "DeepSeek R1 0528 (DeepInfra)"
   passRate: 71.6
   speed: 330100
   cost: 8.020
