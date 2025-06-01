@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+https://github.com/aj47/aider/tree/aj-bench <- Branch for the benchmarking code to run benchmark yourself
+
 This project presents an unofficial leaderboard for Large Language Model (LLM) coding benchmarks, specifically focusing on results from running the [Aider Polyglot Benchmarks](https://aider.chat/docs/leaderboards/).
 
 The goal is to provide insights into the performance (pass rate), speed, and cost associated with various LLMs for coding tasks. This leaderboard includes models that may not appear on official lists, such as smaller, newer, or less common ones.
