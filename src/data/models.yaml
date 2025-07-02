@@ -638,3 +638,48 @@
     seconds_per_case: 330.1
     total_cost: 8.020
     isOpenSource: true
+
+- id: 16
+  name: "ERNIE-4.5-300B"
+  passRate: 61.3
+  speed: 149900
+  cost: 1.534
+  details:
+    dirname: "2025-07-02-13-41-33--ernie"
+    test_cases: 225
+    model: "openrouter/baidu/ernie-4.5-300b-a47b"
+    edit_format: "whole"
+    commit_hash: "3a93da8-dirty"
+    pass_rate_1: 33.3
+    pass_rate_2: 61.3
+    pass_num_1: 75
+    pass_num_2: 138
+    percent_cases_well_formed: 100.0
+    language_pass_rates:
+      cpp_pass_rate_2: 61.5
+      go_pass_rate_2: 61.5
+      java_pass_rate_2: 53.2
+      javascript_pass_rate_2: 67.3
+      python_pass_rate_2: 64.7
+      rust_pass_rate_2: 60.0
+    error_outputs: 961
+    num_malformed_responses: 0
+    num_with_malformed_responses: 0
+    user_asks: 177
+    lazy_comments: 0
+    syntax_errors: 0
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 4
+    total_tests: 225
+    command: "aider --model openrouter/baidu/ernie-4.5-300b-a47b"
+    date: "2025-07-02"
+    versions: "0.82.3.dev"
+    seconds_per_case: 149.9
+    total_cost: 1.534
+    prompt_tokens: 2374921
+    completion_tokens: 421104
+    total_tokens: 2796025
+    avg_prompt_tokens_per_case: 10555.2
+    avg_completion_tokens_per_case: 1871.6
+    avg_total_tokens_per_case: 12426.8
