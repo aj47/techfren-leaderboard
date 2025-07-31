@@ -50,3 +50,4 @@ out/
 .tmp/
 coverage/
 .next
+.augment
