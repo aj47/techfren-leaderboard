@@ -128,6 +128,14 @@ export default function ModelDetailModal({ model, onClose }: ModelDetailModalPro
               <span className="detail-label">Speed:</span>
               <span className="detail-value">{model.details.seconds_per_case} seconds per case</span>
             </div>
+            {model.details.pass_num_2 > 0 && (
+              <div className="detail-item">
+                <span className="detail-label">Seconds per Correct Case:</span>
+                <span className="detail-value">
+                  {((model.details.seconds_per_case * model.details.total_tests) / model.details.pass_num_2).toFixed(1)} seconds
+                </span>
+              </div>
+            )}
             <div className="detail-item">
               <span className="detail-label">Total Cost:</span>
               <span className="detail-value">${model.details.total_cost}</span>

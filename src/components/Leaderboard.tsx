@@ -10,13 +10,14 @@ interface LeaderboardProps {
 
 export default function Leaderboard({ models }: LeaderboardProps) {
   console.log('Leaderboard component rendering with models:', models);
-  const [sortColumn, setSortColumn] = useState<'passRate' | 'speed' | 'cost'>('passRate');
+  const [sortColumn, setSortColumn] = useState<'passRate' | 'speed' | 'cost' | 'secondsPerCorrect'>('passRate');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedModel, setSelectedModel] = useState<Model | null>(null);
   const [currentDate, setCurrentDate] = useState('');
   const [viewMode, setViewMode] = useState<'simple' | 'detailed'>('simple');
+  const [modelTypeFilter, setModelTypeFilter] = useState<'all' | 'opensource' | 'proprietary'>('all');
 
   useEffect(() => {
     // Get the most recent date from model entries
@@ -41,13 +42,14 @@ export default function Leaderboard({ models }: LeaderboardProps) {
     }
   }, [models]);
 
-  const sortBy = (column: 'passRate' | 'speed' | 'cost', language?: string | null) => {
+  const sortBy = (column: 'passRate' | 'speed' | 'cost' | 'secondsPerCorrect', language?: string | null) => {
     if (sortColumn === column && selectedLanguage === language) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
     } else {
       setSortColumn(column);
       setSelectedLanguage(language);
-      setSortDirection('desc');
+      // For secondsPerCorrect and speed, default to ascending (lower is better)
+      setSortDirection(column === 'secondsPerCorrect' || column === 'speed' ? 'asc' : 'desc');
     }
   };
 
@@ -61,7 +63,15 @@ export default function Leaderboard({ models }: LeaderboardProps) {
   };
 
   const sortedModels = useMemo(() => {
-    return [...models].sort((a, b) => {
+    // Filter by model type
+    let filteredModels = models;
+    if (modelTypeFilter === 'opensource') {
+      filteredModels = models.filter(model => model.details.isOpenSource === true);
+    } else if (modelTypeFilter === 'proprietary') {
+      filteredModels = models.filter(model => model.details.isOpenSource === false || model.details.isOpenSource === undefined);
+    }
+    
+    return [...filteredModels].sort((a, b) => {
       let comparison = 0;
 
       // If sorting by pass rate and a language is selected
@@ -76,8 +86,22 @@ export default function Leaderboard({ models }: LeaderboardProps) {
         } else if (aValue > bValue) {
           comparison = 1;
         }
+      } else if (sortColumn === 'secondsPerCorrect') {
+        // Calculate seconds per correct case for each model
+        const aSecondsPerCorrect = a.details.pass_num_2 > 0 
+          ? (a.details.seconds_per_case * a.details.total_tests) / a.details.pass_num_2
+          : Infinity; // Models with no passes sort to the end
+        const bSecondsPerCorrect = b.details.pass_num_2 > 0 
+          ? (b.details.seconds_per_case * b.details.total_tests) / b.details.pass_num_2
+          : Infinity;
+        
+        if (aSecondsPerCorrect < bSecondsPerCorrect) {
+          comparison = -1;
+        } else if (aSecondsPerCorrect > bSecondsPerCorrect) {
+          comparison = 1;
+        }
       } else {
-        // Default sorting
+        // Default sorting for passRate, speed, cost
         if (a[sortColumn] < b[sortColumn]) {
           comparison = -1;
         } else if (a[sortColumn] > b[sortColumn]) {
@@ -87,7 +111,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
 
       return sortDirection === 'asc' ? comparison : -comparison;
     });
-  }, [models, sortColumn, sortDirection, selectedLanguage]);
+  }, [models, sortColumn, sortDirection, selectedLanguage, modelTypeFilter]);
 
   useEffect(() => {
     // Update progress text colors after render
@@ -239,6 +263,32 @@ export default function Leaderboard({ models }: LeaderboardProps) {
               </button>
             </div>
           </div>
+          
+          <div className="model-type-dropdown">
+            <button className="model-type-dropdown-button">
+              Show: {modelTypeFilter === 'all' ? 'All' : modelTypeFilter === 'opensource' ? 'Open Source' : 'Proprietary'}
+            </button>
+            <div className="model-type-dropdown-content">
+              <button 
+                onClick={() => setModelTypeFilter('all')}
+                className={modelTypeFilter === 'all' ? 'active' : ''}
+              >
+                All
+              </button>
+              <button 
+                onClick={() => setModelTypeFilter('opensource')}
+                className={modelTypeFilter === 'opensource' ? 'active' : ''}
+              >
+                Open Source
+              </button>
+              <button 
+                onClick={() => setModelTypeFilter('proprietary')}
+                className={modelTypeFilter === 'proprietary' ? 'active' : ''}
+              >
+                Proprietary
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div className="helper-text">
@@ -262,7 +312,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
               </th>
               <th
                 className={`speed sortable ${sortColumn === 'speed' ? 'active' : ''}`}
-                onClick={() => sortBy('speed')}
+                onClick={() => sortBy('speed', selectedLanguage)}
               >
                 <span className="tooltip-container">
                   Speed per Case
@@ -273,7 +323,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
               </th>
               <th
                 className={`cost sortable ${sortColumn === 'cost' ? 'active' : ''}`}
-                onClick={() => sortBy('cost')}
+                onClick={() => sortBy('cost', selectedLanguage)}
               >
                 Cost
                 {sortColumn === 'cost' && (
@@ -283,6 +333,15 @@ export default function Leaderboard({ models }: LeaderboardProps) {
 
               {viewMode === 'detailed' && (
                 <>
+                  <th
+                    className={`seconds-per-correct sortable ${sortColumn === 'secondsPerCorrect' ? 'active' : ''}`}
+                    onClick={() => sortBy('secondsPerCorrect', selectedLanguage)}
+                  >
+                    Seconds per Correct Case
+                    {sortColumn === 'secondsPerCorrect' && (
+                      <span className="sort-indicator">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                    )}
+                  </th>
                   <th className="pass-rate-first">Pass Rate (First)</th>
                   <th className="date">Date</th>
                   <th className="error-outputs">Error Outputs</th>
@@ -377,6 +436,14 @@ export default function Leaderboard({ models }: LeaderboardProps) {
 
                 {viewMode === 'detailed' && (
                   <>
+                    <td className="seconds-per-correct">
+                      <span className="cell-content">
+                        {model.details.pass_num_2 > 0 
+                          ? `${((model.details.seconds_per_case * model.details.total_tests) / model.details.pass_num_2).toFixed(1)}s`
+                          : 'N/A'
+                        }
+                      </span>
+                    </td>
                     <td className="pass-rate-first">
                       <span className="cell-content">{model.details.pass_rate_1}%</span>
                     </td>
