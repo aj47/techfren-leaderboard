@@ -68,7 +68,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
     if (modelTypeFilter === 'opensource') {
       filteredModels = models.filter(model => model.details.isOpenSource === true);
     } else if (modelTypeFilter === 'proprietary') {
-      filteredModels = models.filter(model => model.details.isOpenSource === false || model.details.isOpenSource === undefined);
+      filteredModels = models.filter(model => model.details.isOpenSource === false);
     }
     
     return [...filteredModels].sort((a, b) => {
@@ -312,7 +312,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
               </th>
               <th
                 className={`speed sortable ${sortColumn === 'speed' ? 'active' : ''}`}
-                onClick={() => sortBy('speed', selectedLanguage)}
+                onClick={() => sortBy('speed')}
               >
                 <span className="tooltip-container">
                   Speed per Case
@@ -323,7 +323,7 @@ export default function Leaderboard({ models }: LeaderboardProps) {
               </th>
               <th
                 className={`cost sortable ${sortColumn === 'cost' ? 'active' : ''}`}
-                onClick={() => sortBy('cost', selectedLanguage)}
+                onClick={() => sortBy('cost')}
               >
                 Cost
                 {sortColumn === 'cost' && (
