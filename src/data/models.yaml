@@ -585,3 +585,35 @@
     total_cost: 0.0000
     isOpenSource: true
     sponsor: "neolithic5452"
+
+- id: 18
+  name: "Pluto1"
+  passRate: 87.1
+  speed: 12500
+  cost: 1.5930
+  details:
+    dirname: 2025-08-10-14-00-00--pluto1-diff
+    test_cases: 225
+    model: Pluto1
+    edit_format: diff
+    commit_hash: 01a9b88
+    pass_rate_1: 45.8
+    pass_rate_2: 87.1
+    pass_num_1: 103
+    pass_num_2: 196
+    percent_cases_well_formed: 98.7
+    error_outputs: 1
+    num_malformed_responses: 0
+    num_with_malformed_responses: 0
+    user_asks: 53
+    lazy_comments: 0
+    syntax_errors: 1
+    indentation_errors: 0
+    exhausted_context_windows: 0
+    test_timeouts: 0
+    total_tests: 225
+    command: aider --model pluto1
+    date: 2025-08-10
+    versions: 0.86.1.dev
+    seconds_per_case: 12.5
+    total_cost: 1.59
